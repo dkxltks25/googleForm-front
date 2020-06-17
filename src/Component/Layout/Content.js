@@ -11,12 +11,24 @@ const SampleForm = styled.div`
   background-color: #f1f3f4;
 `;
 const SampleFormWrapper = styled.div`
-`
+  display: flex;
+  justify-contenxt: space-around;
+`;
 const UserForm = styled.div`
   width: 100%;
   min-height: 200px;
   background-color: #fff;
 `;
+const SampleCard = styled(Card)`
+    maxWidth: 180,
+    minHeight: 180,
+    backgroundColor: "#fff",
+    border: 3,
+    borderColor: "black",
+    borderRadius: 1,
+    boxShadow:'none'
+`;
+
 const useStyle = makeStyles({
   root: {
     maxWidth: 180,
@@ -34,7 +46,7 @@ export default () => {
     <Container>
       <SampleForm>
         <SampleFormWrapper>
-            <Card className={classes.root}></Card>
+            <SampleCard/>
         </SampleFormWrapper>
       </SampleForm>
       <UserForm />
