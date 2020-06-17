@@ -10,7 +10,7 @@ const Container = styled.div`
   margin: 0px auto;
   display: flex;
   justify-content: space-around;
-  border-radius:10px;
+  border-radius: 10px;
 `;
 
 const useStyle = makeStyles({
@@ -31,7 +31,7 @@ export default () => {
   return (
     <Container>
       <Search className={classes.search} />
-      <Input />
+      <Input placeholder="검색" />
     </Container>
   );
 };

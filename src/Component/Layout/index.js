@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "./Header";
-import Content from "./Content"
+import Content from "./Content";
 
 const Conatiner = styled.div`
   margin: 0px auto;
@@ -13,7 +13,7 @@ const Conatiner = styled.div`
 export default () => (
   <Conatiner>
     <Header />
-    <Content/>
+    <Content />
     <div>aside</div>
     <div>footer</div>
   </Conatiner>
