@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
 import { deepOrange } from "@material-ui/core/colors";
-import Search from "../Search";
+import Search from "../Component/Search";
 
 const useStyle = makeStyles((theme) => ({
   root: {

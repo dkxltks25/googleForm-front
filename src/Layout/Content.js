@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, makeStyles } from "@material-ui/core";
 import styled from "styled-components";
-import FormCard from "../FormCard";
+import FormCard from "../Component/FormCard";
 const Container = styled.div`
   width: 100%;
   margin: 0px auto;
@@ -12,7 +12,7 @@ const SampleForm = styled.div`
   background-color: #f1f3f4;
 `;
 const SampleFormWrapper = styled.div`
-  padding:20px;
+  padding: 20px;
   width: 60%;
   margin: 0px auto;
   display: flex;
@@ -41,7 +41,6 @@ export default () => {
     <Container>
       <SampleForm>
         <SampleFormWrapper>
-          <FormCard />
           <FormCard />
           <FormCard />
           <FormCard />
