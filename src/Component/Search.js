@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
+
 const Container = styled.div`
   max-width: 750px;
   height: 46px;

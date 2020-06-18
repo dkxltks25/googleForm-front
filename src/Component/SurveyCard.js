@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { makeStyles, Card } from "@material-ui/core";
+
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -17,12 +18,12 @@ const useStyle = makeStyles({
     width: "calc(100% - 8px)",
   },
 });
-export default () => {
+export default ({ children }) => {
   const classes = useStyle();
   return (
     <Container>
       <HoverBar />
-      <Card className={classes.Card} />
+      <Card className={classes.Card}>{children}</Card>
     </Container>
   );
 };

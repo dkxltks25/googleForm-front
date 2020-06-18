@@ -1,7 +1,10 @@
 import React from "react";
 import {} from "@material-ui/core/Icon";
 
-export const Survey = ({ size = 24 }) => (
+// eslint-disable-next-line import/prefer-default-export
+// eslint-disable-next-line react/prop-types
+// eslint-disable-next-line import/prefer-default-export
+export const Survey = ({ size }) => (
   <img
     height={size}
     alt="logo"
