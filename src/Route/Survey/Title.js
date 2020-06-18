@@ -1,33 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 import { Card, makeStyles } from "@material-ui/core";
-import Title from "../Title";
-import SurveyCard from "../../../Component/SurveyCard";
 const Container = styled.div`
   width: 100%;
-  min-height: 600px;
 `;
-const FormWrap = styled.div`
-  width: 770px;
-  margin: 12px auto;
+const Head = styled.div`
+  width: 100%;
+  background-color: blue;
+  border-radius: 20px 20px 0px 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  height: 10px;
+  width: calc(100% + 2px);
 `;
 const useStyle = makeStyles({
   Card: {
     width: "100%",
     minHeight: 220,
-    marginTop: 12,
   },
 });
 export default () => {
   const classes = useStyle();
   return (
     <Container>
-      <FormWrap>
-        <Title />
-        <SurveyCard/>
-        <Card className={classes.Card} />
-        <Card className={classes.Card} />
-      </FormWrap>
+      <Head />
+      <Card className={classes.Card} />
     </Container>
   );
 };

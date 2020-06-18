@@ -12,7 +12,7 @@ const useStyle = makeStyles({
 export default () => {
   const classes = useStyle();
   return (
-    <AppBar className={classes.root}>
+    <AppBar position="static" className={classes.root}>
       <Toolbar>
         <IconButton>
           <Survey size={24} />
@@ -20,4 +20,4 @@ export default () => {
       </Toolbar>
     </AppBar>
   );
-};
+}
