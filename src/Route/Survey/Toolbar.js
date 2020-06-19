@@ -1,6 +1,13 @@
 import React from "react";
 import { Card, styled, IconButton } from "@material-ui/core";
-import { Add } from "@material-ui/icons";
+import {
+  TextFields,
+  Input,
+  ImageOutlined,
+  OndemandVideo,
+  ViewAgendaOutlined,
+  AddCircleOutline,
+} from "@material-ui/icons";
 const Container = styled("div")({
   display: "flex",
   height: 0,
@@ -23,10 +30,22 @@ export default () => {
       <IconButtonList>
         <ListWrap>
           <IconButton>
-            <Add />
+            <AddCircleOutline />
           </IconButton>
           <IconButton>
-            <Add />
+            <Input />
+          </IconButton>
+          <IconButton>
+            <TextFields />
+          </IconButton>
+          <IconButton>
+            <ImageOutlined />
+          </IconButton>
+          <IconButton>
+            <OndemandVideo />
+          </IconButton>
+          <IconButton>
+            <ViewAgendaOutlined />
           </IconButton>
         </ListWrap>
       </IconButtonList>

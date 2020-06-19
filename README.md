@@ -6,3 +6,8 @@
 
     /form/:id 설문지 제작페이지 
 ###
+
+진행상황
+
+
+![ex_screenshot](./preview.png)
