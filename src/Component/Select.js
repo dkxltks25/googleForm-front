@@ -7,8 +7,8 @@ import {
   ListSubheader,
 } from "@material-ui/core";
 
-export default () => (
-  <FormControl variant="outlined">
+export default ({ className }) => (
+  <FormControl variant="outlined" className={className}>
     <InputLabel id="demo-simple-select-outlined-label"></InputLabel>
     <Select
       labelId="demo-simple-select-outlined-label"

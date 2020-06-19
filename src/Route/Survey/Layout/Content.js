@@ -26,9 +26,7 @@ export default () => {
     <Container>
       <FormWrap>
         <Title />
-        <SurveyCard>
-          <Item />
-        </SurveyCard>
+        <Item />
         <Card className={classes.Card} />
         <Card className={classes.Card} />
       </FormWrap>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Card, makeStyles } from "@material-ui/core";
+import SurveyCard from "../../Component/SurveyCard";
 
 const Container = styled.div`
   width: 100%;
@@ -25,7 +26,9 @@ export default () => {
   return (
     <Container>
       <Head />
-      <Card className={classes.Card} />
+      <SurveyCard>
+        <Card className={classes.Card} />
+      </SurveyCard>
     </Container>
   );
 };

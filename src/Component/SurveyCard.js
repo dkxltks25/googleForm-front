@@ -5,7 +5,6 @@ import { makeStyles, Card } from "@material-ui/core";
 const Container = styled.div`
   width: 100%;
   display: flex;
-  margin-top: 12px;
   min-height: 110px;
 `;
 const HoverBar = styled.div`
