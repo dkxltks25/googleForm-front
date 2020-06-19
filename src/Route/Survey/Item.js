@@ -1,7 +1,7 @@
 import React from "react";
 import { styled, TextField, IconButton, makeStyles } from "@material-ui/core";
 import { DragIndicator, Image } from "@material-ui/icons";
-
+import Select from "../../Component/Select";
 const Header = styled("div")({
   minHeight: 20,
   width: "100%",
@@ -13,9 +13,12 @@ const Content = styled("form")({
   paddingRight: 24,
 });
 
-const ItemHeader = styled("div")({});
-const ItemContent = styled("div")({});
-const ItemFooter = styled("div")({});
+const ItemHeader = styled("div")({
+  display: "flex",
+  justifyContent: "space-around",
+});
+//const ItemContent = styled("div")({});
+//const ItemFooter = styled("div")({});
 const useStyle = makeStyles({
   Drag: {
     margin: "auto",
@@ -23,6 +26,9 @@ const useStyle = makeStyles({
     verticalAlign: "center",
     color: "#ede7f6",
     display: "flex",
+  },
+  title: {
+    flexGrow: 1,
   },
 });
 export default () => {
@@ -34,10 +40,15 @@ export default () => {
       </Header>
       <Content>
         <ItemHeader>
-          <TextField variant="filled" placeholder="제목" />
+          <TextField
+            variant="filled"
+            placeholder="제목"
+            className={classes.title}
+          />
           <IconButton>
             <Image />
           </IconButton>
+          <Select />
         </ItemHeader>
       </Content>
     </>
