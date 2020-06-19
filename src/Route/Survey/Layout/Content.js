@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Card, makeStyles } from "@material-ui/core";
 import Title from "../Title";
-import SurveyCard from "../../../Component/SurveyCard";
 import Item from "../Item";
-
+import Toolbar from "../Toolbar";
 const Container = styled.div`
   width: 100%;
   min-height: 600px;
@@ -25,10 +24,12 @@ export default () => {
   return (
     <Container>
       <FormWrap>
+        <Toolbar />
         <Title />
         <Item />
-        <Card className={classes.Card} />
-        <Card className={classes.Card} />
+        <Item />
+        <Item />
+        <Item />
       </FormWrap>
     </Container>
   );

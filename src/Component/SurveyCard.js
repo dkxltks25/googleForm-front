@@ -17,6 +17,8 @@ const useStyle = makeStyles({
     width: "calc(100% - 8px)",
   },
 });
+
+// eslint-disable-next-line react/prop-types
 export default ({ children }) => {
   const classes = useStyle();
   return (

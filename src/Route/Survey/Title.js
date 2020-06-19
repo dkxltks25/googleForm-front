@@ -1,33 +1,36 @@
 import React from "react";
-import styled from "styled-components";
-import { Card, makeStyles } from "@material-ui/core";
+import { styled, TextField } from "@material-ui/core";
 import SurveyCard from "../../Component/SurveyCard";
 
-const Container = styled.div`
-  width: 100%;
-`;
-const Head = styled.div`
-  width: 100%;
-  background-color: blue;
-  border-radius: 20px 20px 0px 0px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  height: 10px;
-  width: calc(100% + 2px);
-`;
-const useStyle = makeStyles({
-  Card: {
-    width: "100%",
-    minHeight: 220,
-  },
+const Container = styled("div")({
+  width: "100%",
+});
+const Head = styled("div")({
+  backgroundColor: "blue",
+  borderRadius: "20px 20px 0px 0px",
+  borderTopLeftRadius: 8,
+  borderTopRightRadius: 8,
+  height: 10,
+  width: "calc(100% - 2px)",
+});
+const CardWrap = styled("div")({
+  padding: 24,
+});
+const Title = styled(TextField)({
+  width: "100%",
+});
+const Description = styled(TextField)({
+  width: "100%",
 });
 export default () => {
-  const classes = useStyle();
   return (
     <Container>
       <Head />
       <SurveyCard>
-        <Card className={classes.Card} />
+        <CardWrap>
+          <Title placeholder="설문지 제목" />
+          <Description multiline placeholder="설문지설명" />
+        </CardWrap>
       </SurveyCard>
     </Container>
   );
