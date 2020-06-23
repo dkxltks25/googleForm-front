@@ -8,6 +8,7 @@ import {
   ViewAgendaOutlined,
   AddCircleOutline,
 } from "@material-ui/icons";
+
 const Container = styled("div")({
   display: "flex",
   height: 0,
@@ -19,6 +20,7 @@ const Container = styled("div")({
 const IconButtonList = styled(Card)({
   position: "absolute",
   right: "-62px",
+  borderRadius: 10,
 });
 const ListWrap = styled("div")({
   display: "flex",
