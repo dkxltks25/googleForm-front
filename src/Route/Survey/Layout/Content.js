@@ -1,17 +1,18 @@
 import React from "react";
-import styled from "styled-components";
+import { styled } from "@material-ui/core";
 import Title from "../Title";
 import Item from "../Item";
 import Toolbar from "../Toolbar";
 
-const Container = styled.div`
-  width: 100%;
-  min-height: 600px;
-`;
-const FormWrap = styled.div`
-  width: 770px;
-  margin: 12px auto;
-`;
+const Container = styled("div")(({ theme }) => ({
+  width: "100%",
+  minHeight: "600px",
+  padding: theme.spacing(3),
+}));
+const FormWrap = styled("div")({
+  width: 770,
+  margin: "60px auto",
+});
 
 export default () => {
   return (
@@ -19,6 +20,9 @@ export default () => {
       <FormWrap>
         <Toolbar />
         <Title />
+        <Item />
+        <Item />
+        <Item />
         <Item />
         <Item />
         <Item />

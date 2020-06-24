@@ -29,7 +29,7 @@ export default () => {
       <SurveyCard>
         <CardWrap>
           <Title placeholder="설문지 제목" />
-          <Description multilsine placeholder="설문지설명" />
+          <Description multilsine="true" placeholder="설문지설명" />
         </CardWrap>
       </SurveyCard>
     </Container>

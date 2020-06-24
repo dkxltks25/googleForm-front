@@ -7,7 +7,7 @@ import Survey from "../Route/Survey";
 // 로그인x
 const IsLoggedOut = () => (
   <Switch>
-    <Route path="/" exact={true} component={Layout} />
+    <Route path="/" exact component={Layout} />
     <Route path="/create" component={Survey} />
   </Switch>
 );

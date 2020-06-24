@@ -24,17 +24,18 @@ const ToolbarRightColumn = styled("div")({
   display: "flex",
   alignItems: "center",
 });
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) => ({
   root: {
     backgroundColor: "#fff",
     boxShadow: "none",
+    zIndex: theme.zIndex.drawer + 1,
   },
-});
+}));
 
 export default () => {
   const classes = useStyle();
   return (
-    <AppBar position="static" className={classes.root}>
+    <AppBar position="fixed" className={classes.root}>
       <Toolbar>
         <ToolbarLeftColumn>
           <IconButton>
@@ -55,7 +56,7 @@ export default () => {
           <IconButton>
             <MoreVert />
           </IconButton>
-          <Avatar></Avatar>
+          <Avatar />
         </ToolbarRightColumn>
       </Toolbar>
     </AppBar>
