@@ -11,35 +11,37 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 
 const useStyles = makeStyles({
-  list: {
-    width: 250,
+  root: {
+    width: 200,
+    flexShrink: 0,
   },
-  fullList: {
-    width: "auto",
+  drawerPaper: {
+    width: 200,
+    overflow: "auto",
   },
 });
 
 export default () => {
   //const classes = useStyles();
-  const [state, setState] = React.useState({
-    right: false,
-  });
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setState({ ...state, [anchor]: open });
-  };
+  // const [state, setState] = React.useState({
+  //   right: false,
+  // });
+  // const toggleDrawer = (anchor, open) => (event) => {
+  //   if (
+  //     event.type === "keydown" &&
+  //     (event.key === "Tab" || event.key === "Shift")
+  //   ) {
+  //     return;
+  //   }
+  //   setState({ ...state, [anchor]: open });
+  // };
 
   const list = (anchor) => {
     return (
       <div
         role="presentation"
-        onClick={toggleDrawer(anchor, false)}
-        onKeyDown={toggleDrawer(anchor, false)}
+        // onClick={toggleDrawer(anchor, false)}
+        // onKeyDown={toggleDrawer(anchor, false)}
       >
         <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
@@ -65,16 +67,24 @@ export default () => {
       </div>
     );
   };
-
+  const classes = useStyles();
   return (
     <div>
-      <Button onClick={toggleDrawer("right", true)}>right</Button>
+      {/* <Button onClick={toggleDrawer("right", true)}>right</Button> */}
       <Drawer
         anchor="right"
-        open={state.right}
-        onClose={toggleDrawer("right", false)}
+        // open={state.right}
+        // onClose={toggleDrawer("right", false)}
+        className={classes.root}
+        variant="permanent"
       >
-        {list("right")}
+        <div className={classes.drawerPaper}>
+          <div style={{ height: 200 }}>123</div>
+          <div style={{ height: 200 }}>123</div>
+          <div style={{ height: 200 }}>123</div>
+          <div style={{ height: 200 }}>123</div>
+          <div style={{ height: 200 }}>123</div>
+        </div>
       </Drawer>
     </div>
   );
