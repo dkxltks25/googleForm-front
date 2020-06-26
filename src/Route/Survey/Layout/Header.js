@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   AppBar,
   Toolbar,
@@ -14,7 +14,10 @@ import {
   SettingsOutlined,
   MoreVert,
 } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
+
 import { Survey } from "../../../Component/Icon";
+import { ACTION_TOGGLE_COLORDRAWER } from "../../../actions";
 
 const ToolbarLeftColumn = styled("div")({
   flexGrow: 1,
@@ -34,6 +37,11 @@ const useStyle = makeStyles((theme) => ({
 
 export default () => {
   const classes = useStyle();
+  const dispacth = useDispatch();
+  const ToggleColorChange = useCallback(
+    () => dispacth(ACTION_TOGGLE_COLORDRAWER),
+    [dispacth]
+  );
   return (
     <AppBar position="fixed" className={classes.root}>
       <Toolbar>
@@ -43,7 +51,7 @@ export default () => {
           </IconButton>
         </ToolbarLeftColumn>
         <ToolbarRightColumn>
-          <IconButton>
+          <IconButton onClick={ToggleColorChange}>
             <ColorLensOutlined />
           </IconButton>
           <IconButton>

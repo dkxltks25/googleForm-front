@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -9,8 +9,12 @@ import {
   Drawer,
 } from "@material-ui/core";
 import { Cancel, ColorLensOutlined, Image } from "@material-ui/icons";
+import { useSelector, useDispatch } from "react-redux";
+
+import { ACTION_TOGGLE_COLORDRAWER } from "../actions";
 import ColorBox from "./ColorBox";
-import Select from "../Component/Select";
+import Select from "./Select";
+
 const EmptyArea = styled("div")({
   height: 64,
 });
@@ -23,20 +27,6 @@ const ThemeChangeHeaderTitle = styled("div")({
   display: "flex",
   justifyContent: "space-around",
   padding: 12,
-});
-
-const ThemeImageChangeContainer = styled("div")({
-  padding: 32,
-});
-
-const ThemeImageChangeButton = styled("div")({
-  display: "flex",
-  justifyContent: "space-around",
-  maxHeight: 32,
-  maxWidth: 90,
-  border: "1px solid #e8eaed",
-  padding: 6,
-  marginTop: 12,
 });
 
 const ThemePartsTitle = styled("div")({
@@ -66,55 +56,36 @@ const ThemePartsContainer = styled("div")({
   padding: 32,
 });
 /* ThemeChangeHeader */
-const ThemeChangeHeader = () => (
-  <ThemeChangeHeaderContainer>
-    <ThemeChangeHeaderTitle>
-      <ColorLensOutlined />
-      <ThemePartsTitle>테마옵션</ThemePartsTitle>
-    </ThemeChangeHeaderTitle>
-    <IconButton>
-      <Cancel />
-    </IconButton>
-  </ThemeChangeHeaderContainer>
-);
+const ThemeChangeHeader = () => {
+  const dispacth = useDispatch();
+  return (
+    <ThemeChangeHeaderContainer>
+      <ThemeChangeHeaderTitle>
+        <ColorLensOutlined />
+        <ThemePartsTitle>테마옵션</ThemePartsTitle>
+      </ThemeChangeHeaderTitle>
+      <IconButton onClick={() => dispacth(ACTION_TOGGLE_COLORDRAWER)}>
+        <Cancel />
+      </IconButton>
+    </ThemeChangeHeaderContainer>
+  );
+};
 
-/* ThemeImaageChange */
-const ThemeImageChange = () => (
-  <ThemeImageChangeContainer>
-    <ThemePartsTitle>머리글</ThemePartsTitle>
-    <ThemeImageChangeButton>
-      <Image />
-      <Typography variant="overline">이미지 선택</Typography>
-    </ThemeImageChangeButton>
-  </ThemeImageChangeContainer>
-);
 export default () => {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    right: false,
-  });
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setState({ ...state, [anchor]: open });
-  };
-
+  /* Drawer 현재 상태 */
+  const IsOpenDrawer = useSelector(({ ColorDrawerStore }) => ColorDrawerStore);
   return (
     <div>
-      <Button onClick={toggleDrawer("right", true)}>확인</Button>
       <Drawer
         anchor="right"
-        open={state.right}
-        onClose={toggleDrawer("right", false)}
+        open={IsOpenDrawer}
         className={classes.root}
-        variant="permanent"
+        variant="persistent"
       >
         <div className={classes.drawerPaper}>
           <EmptyArea />
+          <ThemeChangeHeader />
           <Divider />
           <ThemePartsContainer>
             <ThemePartsTitle>머리글</ThemePartsTitle>
@@ -139,7 +110,6 @@ export default () => {
             <ThemePartsTitle>글꼴스타일</ThemePartsTitle>
             <Select />
           </ThemePartsContainer>
-          <Button onClick={toggleDrawer("right", false)}>닫기</Button>
         </div>
       </Drawer>
     </div>
