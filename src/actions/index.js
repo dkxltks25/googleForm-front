@@ -28,6 +28,9 @@ export const ACTION_ADD_THEME_COLOR = (color) => ({
   color,
 });
 
+/* 테마 선택 */
+export const ChoseThemeColor = "Chose_Theme_Color";
+
 /* 배경색상 */
 export const ChangeBackgroundColor = "CHANGE_BACKGROUND_COLOR";
 

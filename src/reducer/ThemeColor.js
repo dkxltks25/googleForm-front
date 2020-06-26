@@ -1,7 +1,7 @@
 import { AddThemeColor } from "../actions";
 
 const initalState = [
-  { id: 1, color: "#db4437 ", checked: false, origin: true },
+  { id: 1, color: "#db4437 ", checked: true, origin: true },
   { id: 2, color: "#673ab7 ", checked: false, origin: true },
   { id: 3, color: "#3f51b5 ", checked: false, origin: true },
   { id: 4, color: "#4285f4 ", checked: false, origin: true },

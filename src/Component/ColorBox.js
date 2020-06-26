@@ -1,5 +1,8 @@
 import React from "react";
 import { styled, Tooltip } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { Check } from "@material-ui/icons";
+
 const Container = styled("div")({
   width: "90%",
   display: "flex",
@@ -15,35 +18,26 @@ const Color = styled("div")({
   height: "26px",
   width: "26px",
   margin: "4px",
-  color: "rgba(0,0,0,0)",
+  color: "white",
   overflow: "hidden",
 });
 
-export default () => (
-  <Container>
-    <Tooltip title="Add" placement="top-start">
-      <Color style={{ backgroundColor: "#4caf50" }} />
-    </Tooltip>
-    <Tooltip title="Add" placement="top-start">
-      <Color style={{ backgroundColor: "#4caf50" }} />
-    </Tooltip>
-    <Tooltip title="Add" placement="top-start">
-      <Color style={{ backgroundColor: "#4caf50" }} />
-    </Tooltip>
-    <Tooltip title="Add" placement="top-start">
-      <Color style={{ backgroundColor: "#4caf50" }} />
-    </Tooltip>
-    <Tooltip title="Add" placement="top-start">
-      <Color style={{ backgroundColor: "#4caf50" }} />
-    </Tooltip>
-    <Tooltip title="Add" placement="top-start">
-      <Color style={{ backgroundColor: "#4caf50" }} />
-    </Tooltip>
-    <Tooltip title="Add" placement="top-start">
-      <Color style={{ backgroundColor: "#4caf50" }} />
-    </Tooltip>
-    <Tooltip title="Add" placement="top-start">
-      <Color style={{ backgroundColor: "#4caf50" }} />
-    </Tooltip>
-  </Container>
-);
+export default ({ type }) => {
+  let Colors;
+  if (type === "theme") {
+    Colors = useSelector((store) => store.ThemeColor);
+  } else {
+    Colors = [];
+  }
+  return (
+    <Container>
+      {Colors.map(({ id, color, checked }) => (
+        <Tooltip title={color} key={id} placement="top-start">
+          <Color style={{ background: color }}>
+            {checked ? <Check /> : <></>}
+          </Color>
+        </Tooltip>
+      ))}
+    </Container>
+  );
+};

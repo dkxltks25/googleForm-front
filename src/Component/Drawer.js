@@ -95,12 +95,12 @@ export default () => {
           <Divider />
           <ThemePartsContainer>
             <ThemePartsTitle>테마색상</ThemePartsTitle>
-            <ColorBox />
+            <ColorBox type="theme" />
           </ThemePartsContainer>
           <Divider />
           <ThemePartsContainer>
             <ThemePartsTitle>배경색상</ThemePartsTitle>
-            <ColorBox />
+            <ColorBox type="background" />
           </ThemePartsContainer>
           <Divider />
           <ThemePartsContainer>
