@@ -1,5 +1,4 @@
-import React, { useCallback } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 import {
   Button,
   Divider,
@@ -15,9 +14,23 @@ import { ACTION_TOGGLE_COLORDRAWER } from "../actions";
 import ColorBox from "./ColorBox";
 import Select from "./Select";
 
+/* Drawer */
+const ThemeChange = styled(Drawer)({
+  width: 320,
+  flexShrink: 0,
+});
+/* DrawerPaper */
+const ThemePaper = styled("div")({
+  width: 300,
+  overflow: "auto",
+});
+
+/* 헤더의 빈공간을 맞추기 위한 스타일 */
 const EmptyArea = styled("div")({
   height: 64,
 });
+
+/* Drawer의 설명 부분 */
 const ThemeChangeHeaderContainer = styled("div")({
   display: "flex",
   justifyContent: "space-between",
@@ -29,6 +42,7 @@ const ThemeChangeHeaderTitle = styled("div")({
   padding: 12,
 });
 
+/* Drawer에서 공통적으로 쓰이는 부분 */
 const ThemePartsTitle = styled("div")({
   fontFamily: "Roboto,Arial,sans-serif",
   fontSize: "12px",
@@ -41,20 +55,10 @@ const ThemePartsTitle = styled("div")({
   textTransform: "uppercase",
 });
 
-const useStyles = makeStyles({
-  root: {
-    width: 320,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: 300,
-    overflow: "auto",
-  },
-});
-
 const ThemePartsContainer = styled("div")({
   padding: 32,
 });
+
 /* ThemeChangeHeader */
 const ThemeChangeHeader = () => {
   const dispacth = useDispatch();
@@ -72,18 +76,12 @@ const ThemeChangeHeader = () => {
 };
 
 export default () => {
-  const classes = useStyles();
   /* Drawer 현재 상태 */
   const IsOpenDrawer = useSelector(({ ColorDrawerStore }) => ColorDrawerStore);
   return (
     <div>
-      <Drawer
-        anchor="right"
-        open={IsOpenDrawer}
-        className={classes.root}
-        variant="persistent"
-      >
-        <div className={classes.drawerPaper}>
+      <ThemeChange anchor="right" open={IsOpenDrawer} variant="persistent">
+        <ThemePaper>
           <EmptyArea />
           <ThemeChangeHeader />
           <Divider />
@@ -105,13 +103,12 @@ export default () => {
             <ColorBox />
           </ThemePartsContainer>
           <Divider />
-
           <ThemePartsContainer>
             <ThemePartsTitle>글꼴스타일</ThemePartsTitle>
             <Select />
           </ThemePartsContainer>
-        </div>
-      </Drawer>
+        </ThemePaper>
+      </ThemeChange>
     </div>
   );
 };
