@@ -20,8 +20,15 @@ export const ACTION_CLOSE_COLOR_DRAWER = {
   type: CloseColorDrawer,
 };
 
-/* 배경색상 */
+/* 테마 색상 */
+export const AddThemeColor = "ADD_THEME_COLOR";
 
+export const ACTION_ADD_THEME_COLOR = (color) => ({
+  type: AddThemeColor,
+  color,
+});
+
+/* 배경색상 */
 export const ChangeBackgroundColor = "CHANGE_BACKGROUND_COLOR";
 
 export const ACTION_CHANGE_BACKGROUND_COLOR = (color) => ({
