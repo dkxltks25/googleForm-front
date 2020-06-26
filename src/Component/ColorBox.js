@@ -1,7 +1,9 @@
 import React from "react";
 import { styled, Tooltip } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Check } from "@material-ui/icons";
+
+import { CHOSE_THEME_COLOR, ACTION_CHANGE_BACKGROUND_COLOR } from "../actions";
 
 const Container = styled("div")({
   width: "90%",
@@ -23,17 +25,26 @@ const Color = styled("div")({
 });
 
 export default ({ type }) => {
+  const dispatch = useDispatch();
   let Colors;
+
   if (type === "theme") {
     Colors = useSelector((store) => store.ThemeColor);
   } else {
     Colors = [];
   }
+
   return (
     <Container>
       {Colors.map(({ id, color, checked }) => (
         <Tooltip title={color} key={id} placement="top-start">
-          <Color style={{ background: color }}>
+          <Color
+            style={{ background: color }}
+            onClick={() => {
+              dispatch(CHOSE_THEME_COLOR(id));
+              dispatch(ACTION_CHANGE_BACKGROUND_COLOR(color));
+            }}
+          >
             {checked ? <Check /> : <></>}
           </Color>
         </Tooltip>

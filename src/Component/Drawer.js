@@ -10,7 +10,10 @@ import {
 import { Cancel, ColorLensOutlined, Image } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 
-import { ACTION_TOGGLE_COLORDRAWER } from "../actions";
+import {
+  ACTION_TOGGLE_COLORDRAWER,
+  ACTION_CHANGE_BACKGROUND_COLOR,
+} from "../actions";
 import ColorBox from "./ColorBox";
 import Select from "./Select";
 
@@ -61,14 +64,19 @@ const ThemePartsContainer = styled("div")({
 
 /* ThemeChangeHeader */
 const ThemeChangeHeader = () => {
-  const dispacth = useDispatch();
+  const dispatch = useDispatch();
   return (
     <ThemeChangeHeaderContainer>
       <ThemeChangeHeaderTitle>
         <ColorLensOutlined />
         <ThemePartsTitle>테마옵션</ThemePartsTitle>
       </ThemeChangeHeaderTitle>
-      <IconButton onClick={() => dispacth(ACTION_TOGGLE_COLORDRAWER)}>
+      <IconButton
+        onClick={() => {
+          dispatch(ACTION_TOGGLE_COLORDRAWER);
+          dispatch(ACTION_CHANGE_BACKGROUND_COLOR);
+        }}
+      >
         <Cancel />
       </IconButton>
     </ThemeChangeHeaderContainer>

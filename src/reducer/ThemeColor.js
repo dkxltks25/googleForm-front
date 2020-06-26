@@ -1,4 +1,4 @@
-import { AddThemeColor } from "../actions";
+import { AddThemeColor, ChoseThemeColor } from "../actions";
 
 const initalState = [
   { id: 1, color: "#db4437 ", checked: true, origin: true },
@@ -27,6 +27,16 @@ const ThemeColorReducer = (state = initalState, action) => {
           origin: false,
         },
       ];
+    case ChoseThemeColor:
+      return state.map((color) => {
+        if (color.id === action.id) {
+          return { ...color, checked: true };
+        }
+        if (color.checked === true) {
+          return { ...color, checked: false };
+        }
+        return color;
+      });
     default:
       return state;
   }

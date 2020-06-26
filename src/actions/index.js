@@ -29,7 +29,12 @@ export const ACTION_ADD_THEME_COLOR = (color) => ({
 });
 
 /* 테마 선택 */
-export const ChoseThemeColor = "Chose_Theme_Color";
+export const ChoseThemeColor = "CHOSE_THEME_COLOR";
+
+export const CHOSE_THEME_COLOR = (id) => ({
+  type: ChoseThemeColor,
+  id,
+});
 
 /* 배경색상 */
 export const ChangeBackgroundColor = "CHANGE_BACKGROUND_COLOR";

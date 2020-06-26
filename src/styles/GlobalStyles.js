@@ -11,6 +11,9 @@ const GlobalStyles = createGlobalStyle((props) => {
 });
 
 export default () => {
-  const BgColor = useSelector((state) => state.ChangeColor);
+  const BgColor = useSelector((state) => {
+    console.log(state);
+    return state.ChangeColor;
+  });
   return <GlobalStyles BackgrounColor={BgColor} />;
 };
