@@ -4,9 +4,7 @@ import Header from "./Header";
 import Content from "./Content";
 import Drawer from "../../../Component/Drawer";
 
-const Container = styled("div")({
-  backgroundColor: "#ede7f6",
-});
+const Container = styled("div")({});
 
 export default () => {
   return (

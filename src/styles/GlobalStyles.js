@@ -1,11 +1,16 @@
+import React from "react";
 import { createGlobalStyle } from "styled-components";
-import reset from "reset-css";
-const GlobalStyles = createGlobalStyle`
-    ${reset}
-    body:{
-        margin:0px;
-        padding:0px auto;
-    }
-`;
+import { useSelector } from "react-redux";
 
-export default GlobalStyles;
+const GlobalStyles = createGlobalStyle((props) => {
+  return {
+    body: {
+      background: props.BackgrounColor,
+    },
+  };
+});
+
+export default () => {
+  const BgColor = useSelector((state) => state.ChangeColor);
+  return <GlobalStyles BackgrounColor={BgColor} />;
+};

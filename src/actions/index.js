@@ -19,3 +19,12 @@ export const CloseColorDrawer = "CLOSE_COLOR_DRAWER";
 export const ACTION_CLOSE_COLOR_DRAWER = {
   type: CloseColorDrawer,
 };
+
+/* 배경색상 */
+
+export const ChangeBackgroundColor = "CHANGE_BACKGROUND_COLOR";
+
+export const ACTION_CHANGE_BACKGROUND_COLOR = (color) => ({
+  type: ChangeBackgroundColor,
+  color,
+});
