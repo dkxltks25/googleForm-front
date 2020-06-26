@@ -4,10 +4,11 @@ import Header from "./Header";
 import Content from "./Content";
 import Drawer from "../../../Component/Drawer";
 
-const Container = styled("div")((theme)=>({
+const Container = styled("div")({theme} => ({
   backgroundColor: "#ede7f6",
-  display: "flex",
-}))
+  display:flex,
+  
+}));
 
 const drawerWidth = 240;
 
