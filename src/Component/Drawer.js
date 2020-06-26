@@ -2,20 +2,15 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
-  Card,
   Divider,
   styled,
   Typography,
   IconButton,
   Drawer,
 } from "@material-ui/core";
-import {
-  FormatPaint,
-  Cancel,
-  ColorLensOutlined,
-  Image,
-} from "@material-ui/icons";
-
+import { Cancel, ColorLensOutlined, Image } from "@material-ui/icons";
+import ColorBox from "./ColorBox";
+import Select from "../Component/Select";
 const EmptyArea = styled("div")({
   height: 64,
 });
@@ -131,16 +126,18 @@ export default () => {
           <Divider />
           <ThemePartsContainer>
             <ThemePartsTitle>테마색상</ThemePartsTitle>
+            <ColorBox />
           </ThemePartsContainer>
-
           <Divider />
           <ThemePartsContainer>
             <ThemePartsTitle>배경색상</ThemePartsTitle>
+            <ColorBox />
           </ThemePartsContainer>
           <Divider />
 
           <ThemePartsContainer>
             <ThemePartsTitle>글꼴스타일</ThemePartsTitle>
+            <Select />
           </ThemePartsContainer>
           <Button onClick={toggleDrawer("right", false)}>닫기</Button>
         </div>
