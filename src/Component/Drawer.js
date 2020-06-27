@@ -10,10 +10,7 @@ import {
 import { Cancel, ColorLensOutlined, Image } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  ACTION_TOGGLE_COLORDRAWER,
-  ACTION_CHANGE_BACKGROUND_COLOR,
-} from "../actions";
+import { ACTION_TOGGLE_COLORDRAWER } from "../actions";
 import ColorBox from "./ColorBox";
 import Select from "./Select";
 
@@ -74,7 +71,6 @@ const ThemeChangeHeader = () => {
       <IconButton
         onClick={() => {
           dispatch(ACTION_TOGGLE_COLORDRAWER);
-          dispatch(ACTION_CHANGE_BACKGROUND_COLOR);
         }}
       >
         <Cancel />

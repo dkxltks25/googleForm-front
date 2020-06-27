@@ -43,3 +43,9 @@ export const ACTION_CHANGE_BACKGROUND_COLOR = (color) => ({
   type: ChangeBackgroundColor,
   color,
 });
+
+/*
+  {
+    id:{},backgroundColor:{id};
+  }
+*/
