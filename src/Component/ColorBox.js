@@ -84,7 +84,7 @@ export default ({ type }) => {
         </>
       ) : (
         <>
-          <ColorBoard />
+          <ColorBoard onClick = {()=> setMode(MODE_SELECT)} />
         </>
       )}
     </Container>
