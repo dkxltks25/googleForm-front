@@ -1,6 +1,8 @@
 import React from "react";
-import { styled, TextField, IconButton } from "@material-ui/core";
+import { styled, TextField, IconButton, Typography } from "@material-ui/core";
 import { DragIndicator, Image } from "@material-ui/icons";
+import PropTypes from "prop-types";
+
 import Select from "../../Component/Select";
 /* 드래그 부분  */
 const DragArea = styled("div")({
@@ -37,17 +39,37 @@ const TypeSelect = styled(Select)({
   flexGrow: 0.5,
 });
 
-export default () => (
+const VisibleTitleWrap = styled("div")({
+  paddingLeft: 24,
+  paddingRight: 24,
+});
+const VisibleTitle = styled(Typography)({
+  minWidth: 460,
+});
+
+const ItemHeader = ({ title, itemType, focused }) => (
   <>
     <DragArea>
       <DragIcon />
     </DragArea>
-    <InputTitleAndType>
-      <ItemTitle variant="filled" placeholder="제목" />
-      <InputImageButton>
-        <Image />
-      </InputImageButton>
-      <TypeSelect />
-    </InputTitleAndType>
+    {focused ? (
+      <InputTitleAndType>
+        <ItemTitle variant="filled" placeholder="제목" value={title} />
+        <InputImageButton>
+          <Image />
+        </InputImageButton>
+        <TypeSelect />
+      </InputTitleAndType>
+    ) : (
+      <VisibleTitleWrap>
+        <VisibleTitle >1234</VisibleTitle>
+      </VisibleTitleWrap>
+    )}
   </>
 );
+ItemHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  itemType: PropTypes.string.isRequired,
+  focused: PropTypes.bool.isRequired,
+};
+export default ItemHeader;

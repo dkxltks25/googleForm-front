@@ -19,13 +19,13 @@ const Item = ({ item }) => {
     dispatch(ACTION_CHANGE_FOCUS(item.id));
   }, [dispatch]);
   return (
-    <Container
-      onClick={(event) => {
-        ChangeFocus();
-      }}
-    >
+    <Container onClick={ChangeFocus}>
       <SurveyCard focused={item.focus}>
-        <ItemHeader />
+        <ItemHeader
+          title={item.title}
+          itemType={item.itemType}
+          focused={item.focus}
+        />
         <ItemContent />
         {item.focus && <ItemActionArea />}
       </SurveyCard>
@@ -37,6 +37,8 @@ Item.propTypes = {
   item: PropType.shape({
     id: PropType.number.isRequired,
     focus: PropType.bool.isRequired,
+    title :PropType.string.isRequired,
+    itemType: PropType.string.isRequired
   }).isRequired,
 };
 
