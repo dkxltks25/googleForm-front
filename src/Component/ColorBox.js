@@ -74,17 +74,19 @@ export default ({ type }) => {
               </Color>
             </Tooltip>
           ))}
-          <Tooltip title="맞춤색상추가" placement="top-start">
-            <Color style={{ background: "#eeeeee" }}>
-              <ColorIcon onClick={() => setMode(MODE_ADD)}>
-                <Add style={{ color: "white" }} />
-              </ColorIcon>
-            </Color>
-          </Tooltip>
+          {type === "theme" && (
+            <Tooltip title="맞춤색상추가" placement="top-start">
+              <Color style={{ background: "#eeeeee" }}>
+                <ColorIcon onClick={() => setMode(MODE_ADD)}>
+                  <Add style={{ color: "white" }} />
+                </ColorIcon>
+              </Color>
+            </Tooltip>
+          )}
         </>
       ) : (
         <>
-          <ColorBoard onClick = {()=> setMode(MODE_SELECT)} />
+          <ColorBoard onClick={() => setMode(MODE_SELECT)} />
         </>
       )}
     </Container>

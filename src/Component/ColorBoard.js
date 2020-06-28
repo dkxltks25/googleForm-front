@@ -33,7 +33,7 @@ export default ({ onClick }) => {
   const dispatch = useDispatch();
   const handleClick = useCallback(() => {
     onClick();
-    dispatch(ACTION_ADD_THEME_COLOR(color))
+    dispatch(ACTION_ADD_THEME_COLOR(color));
   }, [color]);
   return (
     <Container>
@@ -52,7 +52,7 @@ export default ({ onClick }) => {
         }}
       />
       <ColorButtonColumn>
-        <CancelButton>취소</CancelButton>
+        <CancelButton onClick={() => onClick()}>취소</CancelButton>
         <SelectButton onClick={handleClick}>추가</SelectButton>
       </ColorButtonColumn>
     </Container>

@@ -9,7 +9,7 @@ const Container = styled("div")(({ theme }) => ({
   minHeight: "600px",
   paddingTop: theme.spacing(10),
 }));
-const FormWrap = styled("div")({
+const FormWrap = styled("form")({
   width: 770,
   margin: "0 auto",
 });
