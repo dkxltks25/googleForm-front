@@ -59,7 +59,7 @@ export const ACTION_ADD_ITEM = {
   type: AddItem,
 };
 
-// 항목 클릭 이벤트 조절하기
+// 항목 클릭 포커스
 
 export const ChangeFocusItem = "CHANGE_FOCUS_ITEM";
 
@@ -69,3 +69,11 @@ export const ACTION_CHANGE_FOCUS = (id) => {
     id,
   };
 };
+
+// 항목 복사
+
+export const CopyFocusItem = "COPY_FOCUS_ITEM";
+
+export const ACTION_COPY_FOCUS = {
+  type: CopyFocusItem
+}

@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { styled, IconButton, Switch } from "@material-ui/core";
 import { FilterNone, DeleteOutline } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
+
+import { ACTION_COPY_FOCUS } from "../../actions";
 
 const Container = styled("div")({
   margin: "0px 24px",
@@ -26,21 +29,25 @@ const ItemIconButtonList = styled("div")({
 });
 const ItemImportSwitch = styled("div")({});
 
-export default () => (
-  <Container>
-    <EmptyArea />
-    <ItemIconButtonList>
-      <IconButton>
-        <FilterNone />
-      </IconButton>
-      <IconButton>
-        <DeleteOutline />
-      </IconButton>
-      <DvideColumn />
-      <ItemImportSwitch>
-        <span>필수</span>
-        <Switch />
-      </ItemImportSwitch>
-    </ItemIconButtonList>
-  </Container>
-);
+export default () => {
+  const dispatch = useDispatch();
+  const CopyFocus = useCallback(() => dispatch(ACTION_COPY_FOCUS), [dispatch]);
+  return (
+    <Container>
+      <EmptyArea />
+      <ItemIconButtonList>
+        <IconButton>
+          <FilterNone onClick={() => CopyFocus()} />
+        </IconButton>
+        <IconButton>
+          <DeleteOutline />
+        </IconButton>
+        <DvideColumn />
+        <ItemImportSwitch>
+          <span>필수</span>
+          <Switch />
+        </ItemImportSwitch>
+      </ItemIconButtonList>
+    </Container>
+  );
+};

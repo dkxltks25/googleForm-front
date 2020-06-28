@@ -1,5 +1,6 @@
-import { AddItem, ChangeFocusItem } from "../actions";
+import { AddItem, ChangeFocusItem, CopyFocusItem } from "../actions";
 
+let countedId = 1;
 const InitalState = [
   {
     id: 1,
@@ -16,13 +17,23 @@ function getEmptySurvey(id) {
     itemType: "1",
     title: "",
     description: "",
-    focus: false,
+    focus: true,
   };
 }
+
 const SurveyItemReducer = (state = InitalState, action) => {
   switch (action.type) {
+    // 항목추가
     case AddItem:
-      return [...state, getEmptySurvey(state.length + 1)];
+      countedId += 1;
+      return [].concat(
+        ...state.map((item) =>
+          item.focus
+            ? [{ ...item, focus: false }, getEmptySurvey(countedId)]
+            : item
+        )
+      );
+    // 포커스변경
     case ChangeFocusItem:
       return state.map((item) => {
         // 지정한 item경우
@@ -35,9 +46,21 @@ const SurveyItemReducer = (state = InitalState, action) => {
         }
         return item;
       });
+    // 포커스된 항목 복사
+    case CopyFocusItem:
+      countedId += 1;
+      return [].concat(
+        ...state.map((item) =>
+          item.focus
+            ? [
+              { ...item, focus: false },
+              { ...item, id: countedId, focus: true },
+              ]
+            : item
+        )
+      );
     default:
       return state;
   }
 };
-
 export default SurveyItemReducer;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, styled } from "@material-ui/core";
+import PropTypes from "prop-types";
 
 const Container = styled("div")({
   width: "100%",
@@ -22,8 +23,7 @@ const WrapCard = styled(Card)({
   width: "calc(100% - 8px)",
 });
 
-// eslint-disable-next-line react/prop-types
-export default ({ children, focused }) => {
+const SurveyCard = ({ children, focused = true }) => {
   return (
     <Container>
       {focused ? <HoverBar /> : <EmptyBar />}
@@ -31,3 +31,10 @@ export default ({ children, focused }) => {
     </Container>
   );
 };
+SurveyCard.propTypes = {
+  children: PropTypes.node.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  focused: PropTypes.bool,
+};
+
+export default SurveyCard;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { styled } from "@material-ui/core";
 import PropType from "prop-types";
 import { useDispatch } from "react-redux";
@@ -15,9 +15,12 @@ const Container = styled("div")({
 
 const Item = ({ item }) => {
   const dispatch = useDispatch();
-
+  const ChangeFocus = useCallback(
+    () => dispatch(ACTION_CHANGE_FOCUS(item.id)),
+    [dispatch]
+  );
   return (
-    <Container onClick={() => dispatch(ACTION_CHANGE_FOCUS(item.id))}>
+    <Container onClick={ChangeFocus}>
       <SurveyCard focused={item.focus}>
         <ItemHeader />
         <ItemContent />
