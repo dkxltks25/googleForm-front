@@ -26,21 +26,15 @@ function getEmptySurvey(id) {
   };
 }
 /* 삭제  */
-// 삭제 순서
-// 1 2 3 4 5 (5,5번째,5)
 function deleteFocusedItem(state) {
-  const findById = state.map((item) => item.focus).indexOf(true) + 1; // 0
-  const Length = state.length; //
-  state.filter((item, index) => {
-    if (findById === Length) {
-      if (index + 1 === Length) {
-        return { ...item, focus: true };
-      } else {
-      }
+  const focusedIndex = state.map((item) => item.focus).indexOf(true);
+  return state
+    .filter(({ focus }) => !focus)
+    .map((item, index) => {
+      if (focusedIndex === 0) return { ...item, focus: true };
+      if (focusedIndex === index + 1) return { ...item, focus: true };
       return item;
-    }
-    return item;
-  });
+    });
 }
 
 const SurveyItemReducer = (state = InitalState, action) => {
@@ -59,11 +53,11 @@ const SurveyItemReducer = (state = InitalState, action) => {
     case ChangeFocusItem:
       return state.map((item) => {
         // 지정한 item경우
-        if (item.id === action.id) {
+        if (!item.focus && item.id === action.id) {
           return { ...item, focus: true };
         }
         // focus가 true인 경우
-        if (item.focus) {
+        if (item.focus && item.id !== action.id) {
           return { ...item, focus: false };
         }
         return item;
@@ -83,7 +77,7 @@ const SurveyItemReducer = (state = InitalState, action) => {
       );
     // 포커스된 항목 삭제
     case RemoveFocusItem:
-      return state;
+      return deleteFocusedItem(state);
     default:
       return state;
   }

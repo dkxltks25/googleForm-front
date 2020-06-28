@@ -44,10 +44,20 @@ export default () => {
     <Container>
       <EmptyArea />
       <ItemIconButtonList>
-        <IconButton onClick={CopyFocus}>
+        <IconButton
+          onClick={(event) => {
+            event.stopPropagation();
+            CopyFocus();
+          }}
+        >
           <FilterNone />
         </IconButton>
-        <IconButton onClick={RemoveFocus}>
+        <IconButton
+          onClick={(event) => {
+            event.stopPropagation();
+            RemoveFocus();
+          }}
+        >
           <DeleteOutline />
         </IconButton>
         <DvideColumn />

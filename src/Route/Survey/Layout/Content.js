@@ -18,7 +18,6 @@ const FormWrap = styled("form")({
 
 export default () => {
   const Items = useSelector((state) => state.SurveyItemReducer);
-  console.log(Items);
   return (
     <Container>
       <FormWrap>

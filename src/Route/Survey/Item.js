@@ -15,16 +15,19 @@ const Container = styled("div")({
 
 const Item = ({ item }) => {
   const dispatch = useDispatch();
-  const ChangeFocus = useCallback(
-    () => dispatch(ACTION_CHANGE_FOCUS(item.id)),
-    [dispatch]
-  );
+  const ChangeFocus = useCallback(() => {
+    dispatch(ACTION_CHANGE_FOCUS(item.id));
+  }, [dispatch]);
   return (
-    <Container onClick={ChangeFocus}>
+    <Container
+      onClick={(event) => {
+        ChangeFocus();
+      }}
+    >
       <SurveyCard focused={item.focus}>
         <ItemHeader />
         <ItemContent />
-        {item.focus && <ItemActionArea/>}
+        {item.focus && <ItemActionArea />}
       </SurveyCard>
     </Container>
   );
