@@ -1,5 +1,7 @@
 import React from "react";
 import { styled } from "@material-ui/core";
+import { useSelector } from "react-redux";
+
 import Title from "../Title";
 import Item from "../Item";
 import Toolbar from "../Toolbar";
@@ -15,18 +17,15 @@ const FormWrap = styled("form")({
 });
 
 export default () => {
+  const Items = useSelector((state) => state.SurveyItemReducer);
   return (
     <Container>
       <FormWrap>
         <Toolbar />
         <Title />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
+        {Items.map((item) => (
+          <Item item={item} key={item.id} />
+        ))}
       </FormWrap>
     </Container>
   );

@@ -49,3 +49,11 @@ export const ACTION_CHANGE_BACKGROUND_COLOR = (color) => ({
     id:{},backgroundColor:{id,color};
   }
 */
+
+/* 설문지 항목  */
+
+export const AddItem = "ADD_ITEM";
+
+export const ACTION_ADD_ITEM = {
+  type: AddItem,
+};

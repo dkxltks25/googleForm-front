@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Card, styled, IconButton } from "@material-ui/core";
 import {
   TextFields,
@@ -8,6 +8,9 @@ import {
   ViewAgendaOutlined,
   AddCircleOutline,
 } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
+
+import { ACTION_ADD_ITEM } from "../../actions";
 
 const Container = styled("div")({
   display: "flex",
@@ -27,11 +30,15 @@ const ListWrap = styled("div")({
   flexDirection: "column",
 });
 export default () => {
+  const dispatch = useDispatch();
+  const AddSurveyItem = useCallback(() => dispatch(ACTION_ADD_ITEM), [
+    dispatch,
+  ]);
   return (
     <Container>
       <IconButtonList>
         <ListWrap>
-          <IconButton>
+          <IconButton onClick={AddSurveyItem}>
             <AddCircleOutline />
           </IconButton>
           <IconButton>
