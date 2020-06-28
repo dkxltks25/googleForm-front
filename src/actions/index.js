@@ -52,8 +52,20 @@ export const ACTION_CHANGE_BACKGROUND_COLOR = (color) => ({
 
 /* 설문지 항목  */
 
+// 항목 추가
 export const AddItem = "ADD_ITEM";
 
 export const ACTION_ADD_ITEM = {
   type: AddItem,
+};
+
+// 항목 클릭 이벤트 조절하기
+
+export const ChangeFocusItem = "CHANGE_FOCUS_ITEM";
+
+export const ACTION_CHANGE_FOCUS = (id) => {
+  return {
+    type: ChangeFocusItem,
+    id,
+  };
 };

@@ -1,30 +1,33 @@
 import React from "react";
-import styled from "styled-components";
-import { makeStyles, Card } from "@material-ui/core";
+import { Card, styled } from "@material-ui/core";
 
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  min-height: 110px;
-`;
-const HoverBar = styled.div`
-  background-color: #4285f4;
-  border-radius: 5px 0px 0px 5px;
-  width: 5px;
-`;
-const useStyle = makeStyles({
-  Card: {
-    width: "calc(100% - 8px)",
-  },
+const Container = styled("div")({
+  width: "100%",
+  display: "flex",
+  minHeight: 110,
+});
+
+const HoverBar = styled("div")({
+  backgroundColor: "#4285f4",
+  borderRadius: "5px 0px 0px 5px",
+  width: 5,
+});
+
+const EmptyBar = styled("div")({
+  borderRadius: "5px 0px 0px 5px",
+  width: "5px",
+});
+
+const WrapCard = styled(Card)({
+  width: "calc(100% - 8px)",
 });
 
 // eslint-disable-next-line react/prop-types
-export default ({ children }) => {
-  const classes = useStyle();
+export default ({ children, focused }) => {
   return (
     <Container>
-      <HoverBar />
-      <Card className={classes.Card}>{children}</Card>
+      {focused ? <HoverBar /> : <EmptyBar />}
+      <WrapCard>{children}</WrapCard>
     </Container>
   );
 };
