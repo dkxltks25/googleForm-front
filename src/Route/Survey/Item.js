@@ -24,7 +24,7 @@ const Item = ({ item }) => {
       <SurveyCard focused={item.focus}>
         <ItemHeader />
         <ItemContent />
-        <ItemActionArea />
+        {item.focus && <ItemActionArea/>}
       </SurveyCard>
     </Container>
   );

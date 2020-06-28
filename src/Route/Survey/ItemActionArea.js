@@ -3,7 +3,10 @@ import { styled, IconButton, Switch } from "@material-ui/core";
 import { FilterNone, DeleteOutline } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 
-import { ACTION_COPY_FOCUS } from "../../actions";
+import {
+  ACTION_COPY_FOCUS_ITEM,
+  ACTION_REMOVE_FOCUS_ITEM,
+} from "../../actions";
 
 const Container = styled("div")({
   margin: "0px 24px",
@@ -31,15 +34,20 @@ const ItemImportSwitch = styled("div")({});
 
 export default () => {
   const dispatch = useDispatch();
-  const CopyFocus = useCallback(() => dispatch(ACTION_COPY_FOCUS), [dispatch]);
+  const CopyFocus = useCallback(() => dispatch(ACTION_COPY_FOCUS_ITEM), [
+    dispatch,
+  ]);
+  const RemoveFocus = useCallback(() => dispatch(ACTION_REMOVE_FOCUS_ITEM), [
+    dispatch,
+  ]);
   return (
     <Container>
       <EmptyArea />
       <ItemIconButtonList>
-        <IconButton>
-          <FilterNone onClick={() => CopyFocus()} />
+        <IconButton onClick={CopyFocus}>
+          <FilterNone />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={RemoveFocus}>
           <DeleteOutline />
         </IconButton>
         <DvideColumn />

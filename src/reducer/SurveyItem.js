@@ -1,4 +1,9 @@
-import { AddItem, ChangeFocusItem, CopyFocusItem } from "../actions";
+import {
+  AddItem,
+  ChangeFocusItem,
+  CopyFocusItem,
+  RemoveFocusItem,
+} from "../actions";
 
 let countedId = 1;
 const InitalState = [
@@ -19,6 +24,23 @@ function getEmptySurvey(id) {
     description: "",
     focus: true,
   };
+}
+/* 삭제  */
+// 삭제 순서
+// 1 2 3 4 5 (5,5번째,5)
+function deleteFocusedItem(state) {
+  const findById = state.map((item) => item.focus).indexOf(true) + 1; // 0
+  const Length = state.length; //
+  state.filter((item, index) => {
+    if (findById === Length) {
+      if (index + 1 === Length) {
+        return { ...item, focus: true };
+      } else {
+      }
+      return item;
+    }
+    return item;
+  });
 }
 
 const SurveyItemReducer = (state = InitalState, action) => {
@@ -53,12 +75,15 @@ const SurveyItemReducer = (state = InitalState, action) => {
         ...state.map((item) =>
           item.focus
             ? [
-              { ...item, focus: false },
-              { ...item, id: countedId, focus: true },
+                { ...item, focus: false },
+                { ...item, id: countedId, focus: true },
               ]
             : item
         )
       );
+    // 포커스된 항목 삭제
+    case RemoveFocusItem:
+      return state;
     default:
       return state;
   }

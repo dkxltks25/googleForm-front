@@ -74,6 +74,14 @@ export const ACTION_CHANGE_FOCUS = (id) => {
 
 export const CopyFocusItem = "COPY_FOCUS_ITEM";
 
-export const ACTION_COPY_FOCUS = {
-  type: CopyFocusItem
-}
+export const ACTION_COPY_FOCUS_ITEM = {
+  type: CopyFocusItem,
+};
+
+// 항목 삭제
+
+export const RemoveFocusItem = "REMOVE_FOCUS_ITEM";
+
+export const ACTION_REMOVE_FOCUS_ITEM = {
+  type: RemoveFocusItem,
+};
