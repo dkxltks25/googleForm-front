@@ -28,13 +28,13 @@ const ColorButtonColumn = styled("div")({});
 const CancelButton = styled(Button)({});
 const SelectButton = styled(Button)({});
 
-export default ({ onClick }) => {
+export default ({ modeType, onClick }) => {
   const [color, setColor] = useState("#000");
   const dispatch = useDispatch();
   const handleClick = useCallback(() => {
-    onClick();
+    onClick(modeType);
     dispatch(ACTION_ADD_THEME_COLOR(color));
-  }, [color]);
+  }, [color, modeType, onClick, dispatch]);
   return (
     <Container>
       <input
@@ -52,7 +52,7 @@ export default ({ onClick }) => {
         }}
       />
       <ColorButtonColumn>
-        <CancelButton onClick={() => onClick()}>취소</CancelButton>
+        <CancelButton onClick={() => onClick(modeType)}>취소</CancelButton>
         <SelectButton onClick={handleClick}>추가</SelectButton>
       </ColorButtonColumn>
     </Container>

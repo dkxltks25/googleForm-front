@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { styled, Tooltip } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { Check, Add } from "@material-ui/icons";
@@ -51,6 +51,13 @@ export default ({ type }) => {
     Colors = [];
   }
 
+  const changeMode = useCallback(
+    (mode) => {
+      return setMode(mode);
+    },
+    [mode]
+  );
+
   return (
     <Container>
       {mode === MODE_SELECT ? (
@@ -77,7 +84,10 @@ export default ({ type }) => {
           {type === "theme" && (
             <Tooltip title="맞춤색상추가" placement="top-start">
               <Color style={{ background: "#eeeeee" }}>
-                <ColorIcon onClick={() => setMode(MODE_ADD)}>
+                <ColorIcon
+                  modeType={MODE_ADD}
+                  onClick={() => changeMode(MODE_ADD)}
+                >
                   <Add style={{ color: "white" }} />
                 </ColorIcon>
               </Color>
@@ -86,7 +96,7 @@ export default ({ type }) => {
         </>
       ) : (
         <>
-          <ColorBoard onClick={() => setMode(MODE_SELECT)} />
+          <ColorBoard modeType={MODE_SELECT} onClick={changeMode} />
         </>
       )}
     </Container>
