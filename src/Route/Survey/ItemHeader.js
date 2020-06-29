@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { styled, TextField, IconButton, Typography } from "@material-ui/core";
 import { DragIndicator, Image } from "@material-ui/icons";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 
 import Select from "../../Component/Select";
+import { ACTION_ADD_ITEM_TITLE } from "../../actions";
+
 /* 드래그 부분  */
 const DragArea = styled("div")({
   minHeight: 20,
@@ -35,9 +38,6 @@ const InputImageButton = styled(IconButton)({
   maxWidth: 56,
   maxHeight: 56,
 });
-const TypeSelect = styled(Select)({
-  flexGrow: 0.5,
-});
 
 const VisibleTitleWrap = styled("div")({
   paddingLeft: 24,
@@ -47,26 +47,42 @@ const VisibleTitle = styled(Typography)({
   minWidth: 460,
 });
 
-const ItemHeader = ({ title, itemType, focused }) => (
-  <>
-    <DragArea>
-      <DragIcon />
-    </DragArea>
-    {focused ? (
-      <InputTitleAndType>
-        <ItemTitle variant="filled" placeholder="제목" value={title} />
-        <InputImageButton>
-          <Image />
-        </InputImageButton>
-        <TypeSelect />
-      </InputTitleAndType>
-    ) : (
-      <VisibleTitleWrap>
-        <VisibleTitle >1234</VisibleTitle>
-      </VisibleTitleWrap>
-    )}
-  </>
-);
+const ItemHeader = ({ title, itemType, focused }) => {
+  console.log(itemType,"-----")
+  const dispatch = useDispatch();
+  const [titleValue, setTitle] = useState(title);
+  const handleChangeTitle = useCallback(() => {
+    dispatch(ACTION_ADD_ITEM_TITLE(titleValue));
+  }, [dispatch, titleValue]);
+  return (
+    <>
+      <DragArea>
+        <DragIcon />
+      </DragArea>
+      {focused ? (
+        <InputTitleAndType>
+          <ItemTitle
+            variant="filled"
+            placeholder="제목"
+            value={titleValue}
+            onChange={(e) => {
+              setTitle(e.currentTarget.value);
+              handleChangeTitle();
+            }}
+          />
+          <InputImageButton>
+            <Image />
+          </InputImageButton>
+          <Select itemType={itemType} />
+        </InputTitleAndType>
+      ) : (
+        <VisibleTitleWrap>
+          <VisibleTitle>1234</VisibleTitle>
+        </VisibleTitleWrap>
+      )}
+    </>
+  );
+};
 ItemHeader.propTypes = {
   title: PropTypes.string.isRequired,
   itemType: PropTypes.string.isRequired,

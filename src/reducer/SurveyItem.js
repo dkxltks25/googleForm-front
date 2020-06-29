@@ -3,6 +3,8 @@ import {
   ChangeFocusItem,
   CopyFocusItem,
   RemoveFocusItem,
+  AddItemTitle,
+  ChangeItemType,
 } from "../actions";
 
 let countedId = 1;
@@ -26,7 +28,7 @@ function getEmptySurvey(id) {
   };
 }
 /* 삭제  */
-function deleteFocusedItem(state) {
+function removeFocusedItem(state) {
   const focusedIndex = state.map((item) => item.focus).indexOf(true);
   return state
     .filter(({ focus }) => !focus)
@@ -35,6 +37,19 @@ function deleteFocusedItem(state) {
       if (focusedIndex === index + 1) return { ...item, focus: true };
       return item;
     });
+}
+
+/* 제목 입력 */
+
+function addItemTitle(state, title) {
+  return state.map((item) => (item.focus ? { ...item, title } : item));
+}
+
+/* 항목 타입 설정 */
+
+function changeItemType(state, itemType) {
+  console.log(itemType, "itemType");
+  return state.map((item) => (item.focus ? { ...item, itemType } : item));
 }
 
 const SurveyItemReducer = (state = InitalState, action) => {
@@ -77,7 +92,11 @@ const SurveyItemReducer = (state = InitalState, action) => {
       );
     // 포커스된 항목 삭제
     case RemoveFocusItem:
-      return deleteFocusedItem(state);
+      return removeFocusedItem(state);
+    case AddItemTitle:
+      return addItemTitle(state, action.title);
+    case ChangeItemType:
+      return changeItemType(state, action.itemType);
     default:
       return state;
   }

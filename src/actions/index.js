@@ -85,3 +85,19 @@ export const RemoveFocusItem = "REMOVE_FOCUS_ITEM";
 export const ACTION_REMOVE_FOCUS_ITEM = {
   type: RemoveFocusItem,
 };
+
+// 제목 입력
+
+export const AddItemTitle = "ADD_ITEM_TITLE";
+
+export const ACTION_ADD_ITEM_TITLE = (title) => ({
+  type: AddItemTitle,
+  title,
+});
+
+export const ChangeItemType = "CHANGE_ITEM_TYPE";
+
+export const ACTION_CHANGE_ITEM_TYPE = (itemType) => ({
+  type: ChangeItemType,
+  itemType,
+});
