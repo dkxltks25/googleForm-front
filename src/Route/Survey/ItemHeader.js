@@ -48,7 +48,6 @@ const VisibleTitle = styled(Typography)({
 });
 
 const ItemHeader = ({ title, itemType, focused }) => {
-  console.log(itemType,"-----")
   const dispatch = useDispatch();
   const [titleValue, setTitle] = useState(title);
   const handleChangeTitle = useCallback(() => {

@@ -38,7 +38,6 @@ export default ({ itemType = "3" }) => {
           console.log(event.target.value);
           setItemType(event.target.value);
           dispatch(ACTION_CHANGE_ITEM_TYPE(event.target.value));
-
         }}
       >
         <SelectOption value="0">단답형</SelectOption>
