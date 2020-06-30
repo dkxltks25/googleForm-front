@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import {
   ACTION_COPY_FOCUS_ITEM,
   ACTION_REMOVE_FOCUS_ITEM,
-} from "../../actions";
+} from "../../../actions";
 
 const Container = styled("div")({
   margin: "0px 24px",

@@ -3,11 +3,11 @@ import { styled } from "@material-ui/core";
 import PropType from "prop-types";
 import { useDispatch } from "react-redux";
 
-import SurveyCard from "../../Component/SurveyCard";
+import SurveyCard from "../../../Component/SurveyCard";
 import ItemHeader from "./ItemHeader";
 import ItemContent from "./ItemContent";
 import ItemActionArea from "./ItemActionArea";
-import { ACTION_CHANGE_FOCUS } from "../../actions";
+import { ACTION_CHANGE_FOCUS } from "../../../actions";
 
 const Container = styled("div")({
   marginTop: 12,

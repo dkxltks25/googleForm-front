@@ -4,8 +4,8 @@ import { DragIndicator, Image } from "@material-ui/icons";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 
-import Select from "../../Component/Select";
-import { ACTION_ADD_ITEM_TITLE } from "../../actions";
+import Select from "../../../Component/Select";
+import { ACTION_ADD_ITEM_TITLE } from "../../../actions";
 
 /* 드래그 부분  */
 const DragArea = styled("div")({
