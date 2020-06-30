@@ -1,9 +1,8 @@
 import React from "react";
 import { styled } from "@material-ui/core";
-import { useSelector } from "react-redux";
 
 import Title from "../Title";
-import Items from "../Item/";
+import Items from "../Item/index";
 import Toolbar from "../Toolbar";
 
 const Container = styled("div")(({ theme }) => ({
@@ -17,7 +16,6 @@ const FormWrap = styled("form")({
 });
 
 export default () => {
-  //const Items = useSelector((state) => state.SurveyItemReducer);
   return (
     <Container>
       <FormWrap>

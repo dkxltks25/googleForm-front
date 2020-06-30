@@ -84,10 +84,7 @@ export default ({ type }) => {
           {type === "theme" && (
             <Tooltip title="맞춤색상추가" placement="top-start">
               <Color style={{ background: "#eeeeee" }}>
-                <ColorIcon
-                  modeType={MODE_ADD}
-                  onClick={() => changeMode(MODE_ADD)}
-                >
+                <ColorIcon mode={MODE_ADD} onClick={() => changeMode(MODE_ADD)}>
                   <Add style={{ color: "white" }} />
                 </ColorIcon>
               </Color>
@@ -96,7 +93,7 @@ export default ({ type }) => {
         </>
       ) : (
         <>
-          <ColorBoard modeType={MODE_SELECT} onClick={changeMode} />
+          <ColorBoard mode={MODE_SELECT} onClick={changeMode} />
         </>
       )}
     </Container>

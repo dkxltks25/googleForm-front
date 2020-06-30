@@ -95,9 +95,20 @@ export const ACTION_ADD_ITEM_TITLE = (title) => ({
   title,
 });
 
+// 설문지 항목별 옵션 변경
 export const ChangeItemType = "CHANGE_ITEM_TYPE";
 
 export const ACTION_CHANGE_ITEM_TYPE = (itemType) => ({
   type: ChangeItemType,
   itemType,
+});
+
+// 설문지 항목 드래그 앤 드롭
+
+export const MoveItem = "MOVE_ITEM";
+
+export const ACTION_MOVE_ITEM = (id, targetIndex) => ({
+  type: MoveItem,
+  id,
+  targetIndex,
 });

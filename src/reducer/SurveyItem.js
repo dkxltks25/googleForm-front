@@ -1,3 +1,5 @@
+import update from "immutability-helper";
+
 import {
   AddItem,
   ChangeFocusItem,
@@ -5,6 +7,7 @@ import {
   RemoveFocusItem,
   AddItemTitle,
   ChangeItemType,
+  MoveItem,
 } from "../actions";
 
 let countedId = 1;
@@ -48,8 +51,26 @@ function addItemTitle(state, title) {
 /* 항목 타입 설정 */
 
 function changeItemType(state, itemType) {
-  console.log(itemType, "itemType");
   return state.map((item) => (item.focus ? { ...item, itemType } : item));
+}
+
+// 항목 찾기(id)
+function findItem(state, id) {
+  const item = state.filter((i) => i.id === id)[0]; // 정수형 Id라 문자 id 변경
+  return {
+    item,
+    index: state.indexOf(item),
+  };
+}
+/* 항목 위치 변경 */
+function moveItem(state, id, targetIndex) {
+  const { item, index } = findItem(state, id);
+  return update(state, {
+    $splice: [
+      [index, 1],
+      [targetIndex, 0, item],
+    ],
+  });
 }
 
 const SurveyItemReducer = (state = InitalState, action) => {
@@ -90,15 +111,18 @@ const SurveyItemReducer = (state = InitalState, action) => {
             : item
         )
       );
-    // 포커스된 항목 삭제
-    case RemoveFocusItem:
+    case RemoveFocusItem: // 포커스된 항목 삭제
       return removeFocusedItem(state);
-    case AddItemTitle:
+    case AddItemTitle: // 제목 추가
       return addItemTitle(state, action.title);
-    case ChangeItemType:
+    case ChangeItemType: // 설문지 항목 아이템 변경
       return changeItemType(state, action.itemType);
+    case MoveItem: // 설문지 위치 변경
+      return moveItem(state, action.id, action.targetIndex);
     default:
       return state;
   }
 };
 export default SurveyItemReducer;
+
+

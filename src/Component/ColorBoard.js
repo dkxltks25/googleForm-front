@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { styled, Button, TextField } from "@material-ui/core";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
 import { ACTION_ADD_THEME_COLOR } from "../actions";
 
@@ -28,7 +29,8 @@ const ColorButtonColumn = styled("div")({});
 const CancelButton = styled(Button)({});
 const SelectButton = styled(Button)({});
 
-export default ({ modeType, onClick }) => {
+const ColorBoard = ({ onClick }) => {
+  const modeType = "SELECT_MODE";
   const [color, setColor] = useState("#000");
   const dispatch = useDispatch();
   const handleClick = useCallback(() => {
@@ -58,3 +60,10 @@ export default ({ modeType, onClick }) => {
     </Container>
   );
 };
+
+ColorBoard.propTypes = {
+  modeType: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+export default ColorBoard;
