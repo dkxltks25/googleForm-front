@@ -1,5 +1,7 @@
 import update from "immutability-helper";
 
+import { itemType as types } from "../word";
+
 import {
   AddItem,
   ChangeFocusItem,
@@ -14,7 +16,7 @@ let countedId = 1;
 const InitalState = [
   {
     id: 1,
-    itemType: "1",
+    itemType: types.ShortAnswer,
     title: "",
     description: "",
     focus: true,
@@ -29,15 +31,15 @@ const InitalState = [
 function getEmptySurvey(id) {
   return {
     id,
-    itemType: "1",
+    itemType: types.ShortAnswer,
     title: "",
     description: "",
     focus: true,
-    question:[
+    question: [
       {
-        id:1
-      }
-    ]
+        id: 1,
+      },
+    ],
   };
 }
 /* 삭제  */

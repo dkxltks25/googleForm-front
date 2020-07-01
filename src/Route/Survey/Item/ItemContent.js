@@ -1,7 +1,8 @@
 import React from "react";
 import { styled } from "@material-ui/core";
 
-import Question from "../Question";
+import ShortAnswer from "../ItemContentTypes/ShortAnser";
+import { itemType as types } from "../../../word";
 
 const Container = styled("div")({
   width: "100%",
@@ -20,28 +21,28 @@ const ItemTypeIsJ = () => "날짜";
 const ItemTypeIsK = () => "시간";
 
 const ItemTypes = ({ itemType }) => {
-  switch (parseInt(itemType,10)) {
-    case 0:
-      return <ItemTypeIsA />;
-    case 1:
+  switch (itemType) {
+    case types.ShortAnswer:
+      return <ShortAnswer />;
+    case types.Long:
       return <ItemTypeIsB />;
-    case 2:
+    case types.MultipleChoiceQuestions:
       return <ItemTypeIsC />;
-    case 3:
+    case types.CheckBox:
       return <ItemTypeIsD />;
-    case 4:
+    case types.DropDown:
       return <ItemTypeIsE />;
-    case 5:
+    case types.FileUpload:
       return <ItemTypeIsF />;
-    case 6:
+    case types.StraightStep:
       return <ItemTypeIsG />;
-    case 7:
+    case types.MultipleChoiceGrid:
       return <ItemTypeIsH />;
-    case 8:
+    case types.CheckBoxGrid:
       return <ItemTypeIsI />;
-    case 9:
+    case types.date:
       return <ItemTypeIsJ />;
-    case 10:
+    case types.time:
       return <ItemTypeIsK />;
     default:
       return <ItemTypeIsA />;
