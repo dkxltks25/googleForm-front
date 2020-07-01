@@ -57,7 +57,11 @@ const Item = ({ item, findItem }) => {
           itemType={item.itemType}
           focused={item.focus}
         />
-        <ItemContent itemType={item.itemType} question={item.question} />
+        <ItemContent
+          id={item.id}
+          itemType={item.itemType}
+          question={item.question}
+        />
         {item.focus && <ItemActionArea />}
       </SurveyCard>
     </Container>
@@ -70,7 +74,7 @@ Item.propTypes = {
     focus: PropType.bool.isRequired,
     title: PropType.string.isRequired,
     itemType: PropType.string.isRequired,
-    question: PropType.object.isRequired,
+    question: PropType.array.isRequired,
   }).isRequired,
   findItem: PropType.func.isRequired,
 };

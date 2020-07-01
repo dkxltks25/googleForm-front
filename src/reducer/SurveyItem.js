@@ -12,7 +12,9 @@ import {
   MoveItem,
 } from "../actions";
 
-let countedId = 1;
+let ItemId = 1;
+// let QuestionId = 1;
+
 const InitalState = [
   {
     id: 1,
@@ -20,9 +22,11 @@ const InitalState = [
     title: "",
     description: "",
     focus: true,
+    isEtc: false, // 기타 옵션 있는지 없는지
     question: [
       {
         id: 1,
+        title: "",
       },
     ],
   },
@@ -35,12 +39,54 @@ function getEmptySurvey(id) {
     title: "",
     description: "",
     focus: true,
+    isEtc: false, // 기타 옵션 있는지 없는지
     question: [
       {
         id: 1,
+        title: "",
       },
     ],
   };
+}
+
+/* 아이템 추가 */
+function addItem(state) {
+  ItemId += 1;
+  return [].concat(
+    ...state.map((item) =>
+      item.focus ? [{ ...item, focus: false }, getEmptySurvey(ItemId)] : item
+    )
+  );
+}
+
+/* 아에팀 포커스 변경 */
+function changeFocusItem(state, id) {
+  return state.map((item) => {
+    // 지정한 item경우
+    if (!item.focus && item.id === id) {
+      return { ...item, focus: true };
+    }
+    // focus가 true인 경우
+    if (item.focus && item.id !== id) {
+      return { ...item, focus: false };
+    }
+    return item;
+  });
+}
+
+/* 포커스된 항목 복사 */
+function copyFocusItem(state) {
+  ItemId += 1;
+  return [].concat(
+    ...state.map((item) =>
+      item.focus
+        ? [
+            { ...item, focus: false },
+            { ...item, id: ItemId, focus: true },
+          ]
+        : item
+    )
+  );
 }
 /* 삭제  */
 function removeFocusedItem(state) {
@@ -55,7 +101,6 @@ function removeFocusedItem(state) {
 }
 
 /* 제목 입력 */
-
 function addItemTitle(state, title) {
   return state.map((item) => (item.focus ? { ...item, title } : item));
 }
@@ -87,42 +132,12 @@ function moveItem(state, id, targetIndex) {
 
 const SurveyItemReducer = (state = InitalState, action) => {
   switch (action.type) {
-    // 항목추가
-    case AddItem:
-      countedId += 1;
-      return [].concat(
-        ...state.map((item) =>
-          item.focus
-            ? [{ ...item, focus: false }, getEmptySurvey(countedId)]
-            : item
-        )
-      );
-    // 포커스변경
-    case ChangeFocusItem:
-      return state.map((item) => {
-        // 지정한 item경우
-        if (!item.focus && item.id === action.id) {
-          return { ...item, focus: true };
-        }
-        // focus가 true인 경우
-        if (item.focus && item.id !== action.id) {
-          return { ...item, focus: false };
-        }
-        return item;
-      });
-    // 포커스된 항목 복사
-    case CopyFocusItem:
-      countedId += 1;
-      return [].concat(
-        ...state.map((item) =>
-          item.focus
-            ? [
-                { ...item, focus: false },
-                { ...item, id: countedId, focus: true },
-              ]
-            : item
-        )
-      );
+    case AddItem:    // 항목추가
+      return addItem(state);
+    case ChangeFocusItem: // 포커스변경
+      return changeFocusItem(state, action.id);
+    case CopyFocusItem: // 포커스된 항목 복사
+      return copyFocusItem(state);
     case RemoveFocusItem: // 포커스된 항목 삭제
       return removeFocusedItem(state);
     case AddItemTitle: // 제목 추가

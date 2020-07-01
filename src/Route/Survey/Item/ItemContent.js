@@ -1,7 +1,10 @@
 import React from "react";
 import { styled } from "@material-ui/core";
+import PropType from "prop-types";
 
 import ShortAnswer from "../ItemContentTypes/ShortAnser";
+import Long from "../ItemContentTypes/Long";
+import MultipleChoiceQuestions from "../ItemContentTypes/MultipleChoiceQuestions";
 import { itemType as types } from "../../../word";
 
 const Container = styled("div")({
@@ -9,8 +12,6 @@ const Container = styled("div")({
 });
 
 const ItemTypeIsA = () => "단답형";
-const ItemTypeIsB = () => "장문형";
-const ItemTypeIsC = () => "객관식질문";
 const ItemTypeIsD = () => "체크박스";
 const ItemTypeIsE = () => "드롭다운";
 const ItemTypeIsF = () => "파일업로드";
@@ -20,14 +21,15 @@ const ItemTypeIsI = () => "체크박스그리드";
 const ItemTypeIsJ = () => "날짜";
 const ItemTypeIsK = () => "시간";
 
-const ItemTypes = ({ itemType }) => {
+// eslint-disable-next-line react/prop-types
+const ItemTypes = ({ itemType, id, question }) => {
   switch (itemType) {
     case types.ShortAnswer:
       return <ShortAnswer />;
     case types.Long:
-      return <ItemTypeIsB />;
+      return <Long />;
     case types.MultipleChoiceQuestions:
-      return <ItemTypeIsC />;
+      return <MultipleChoiceQuestions id={id} question={question} />;
     case types.CheckBox:
       return <ItemTypeIsD />;
     case types.DropDown:
@@ -49,8 +51,17 @@ const ItemTypes = ({ itemType }) => {
   }
 };
 
-export default ({ itemType, question }) => (
+const ItemContent = ({ itemType, question, id }) => (
   <Container onMouseDown={(e) => e.preventDefault()}>
-    <ItemTypes itemType={itemType} />
+    <ItemTypes itemType={itemType} question={question} id={id} />
   </Container>
 );
+
+ItemContent.propTypes = {
+  itemType: PropType.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  question: PropType.array.isRequired,
+  id: PropType.number.isRequired,
+};
+
+export default ItemContent;
