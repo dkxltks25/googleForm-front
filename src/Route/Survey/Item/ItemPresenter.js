@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef, forwardRef } from "react";
 import { styled } from "@material-ui/core";
 import PropType from "prop-types";
 import { useDispatch } from "react-redux";
@@ -20,8 +20,9 @@ const Item = ({ item, findItem }) => {
   const ChangeFocus = useCallback(() => {
     dispatch(ACTION_CHANGE_FOCUS(item.id));
   }, [item.id, dispatch]);
-
+  const dragRef = useRef(null);
   const originalIndex = findItem(item.id);
+  // eslint-disable-next-line no-unused-vars
   const [{ isDragging }, drag] = useDrag({
     item: { type: dataType.item, id: item.id, originalIndex },
     collect: (monitor) => {
@@ -32,7 +33,6 @@ const Item = ({ item, findItem }) => {
     end: (dropResult, monitor) => {
       const { id: dropeedId, originalIndex: originIndex } = monitor.getItem();
       const didDrop = monitor.didDrop();
-      console.log(dropeedId, originIndex, didDrop);
       if (!didDrop) {
         dispatch(ACTION_MOVE_ITEM(dropeedId, originIndex));
       }
@@ -50,19 +50,20 @@ const Item = ({ item, findItem }) => {
   });
 
   return (
-    <div ref={(node) => drag(drop(node))}>
-      <Container onClick={ChangeFocus}>
-        <SurveyCard focused={item.focus}>
-          <ItemHeader
-            title={item.title}
-            itemType={item.itemType}
-            focused={item.focus}
-          />
-          <ItemContent />
-          {item.focus && <ItemActionArea />}
-        </SurveyCard>
-      </Container>
-    </div>
+    <Container
+      onClick={ChangeFocus}
+      ref={(ref) => drag(drop(ref))}
+    >
+      <SurveyCard focused={item.focus}>
+        <ItemHeader
+          title={item.title}
+          itemType={item.itemType}
+          focused={item.focus}
+        />
+        <ItemContent />
+        {item.focus && <ItemActionArea />}
+      </SurveyCard>
+    </Container>
   );
 };
 

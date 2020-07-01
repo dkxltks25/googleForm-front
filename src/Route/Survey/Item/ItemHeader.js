@@ -59,7 +59,7 @@ const ItemHeader = ({ title, itemType, focused }) => {
         <DragIcon />
       </DragArea>
       {focused ? (
-        <InputTitleAndType>
+        <InputTitleAndType onMouseDown={(e) => e.preventDefault()}>
           <ItemTitle
             variant="filled"
             placeholder="제목"
@@ -75,8 +75,8 @@ const ItemHeader = ({ title, itemType, focused }) => {
           <Select itemType={itemType} />
         </InputTitleAndType>
       ) : (
-        <VisibleTitleWrap>
-          <VisibleTitle>1234</VisibleTitle>
+        <VisibleTitleWrap onMouseDown={(e) => e.preventDefault()}>
+          <VisibleTitle>{titleValue}</VisibleTitle>
         </VisibleTitleWrap>
       )}
     </>

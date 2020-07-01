@@ -1,6 +1,14 @@
 import React from "react";
 import { styled } from "@material-ui/core";
 
-const Container = styled("div")({ width: "100%", paddingTop: 24 });
+import Question from "../Question";
 
-export default () => <Container />;
+const Container = styled("div")({
+  width: "100%",
+});
+
+export default () => (
+  <Container onMouseDown={(e) => e.preventDefault()}>
+    <Question />
+  </Container>
+);

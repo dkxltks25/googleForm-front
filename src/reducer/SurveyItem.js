@@ -124,5 +124,3 @@ const SurveyItemReducer = (state = InitalState, action) => {
   }
 };
 export default SurveyItemReducer;
-
-
