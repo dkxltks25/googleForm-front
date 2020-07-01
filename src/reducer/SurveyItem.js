@@ -18,6 +18,11 @@ const InitalState = [
     title: "",
     description: "",
     focus: true,
+    question: [
+      {
+        id: 1,
+      },
+    ],
   },
 ];
 
@@ -28,6 +33,11 @@ function getEmptySurvey(id) {
     title: "",
     description: "",
     focus: true,
+    question:[
+      {
+        id:1
+      }
+    ]
   };
 }
 /* 삭제  */

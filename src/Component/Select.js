@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import {
   FormControl,
   Select,
@@ -23,7 +23,7 @@ const DivideSelect = styled(Divider)({
   padding: 8,
 });
 
-export default ({ itemType = "3" }) => {
+export default ({ itemType}) => {
   const [ItemTypeValue, setItemType] = useState(itemType);
   const dispatch = useDispatch();
   // const ChangeItemType = useCallback(() => {
@@ -35,7 +35,6 @@ export default ({ itemType = "3" }) => {
         id="demo-simple-select"
         value={ItemTypeValue}
         onChange={(event) => {
-          console.log(event.target.value);
           setItemType(event.target.value);
           dispatch(ACTION_CHANGE_ITEM_TYPE(event.target.value));
         }}

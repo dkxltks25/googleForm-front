@@ -50,17 +50,14 @@ const Item = ({ item, findItem }) => {
   });
 
   return (
-    <Container
-      onClick={ChangeFocus}
-      ref={(ref) => drag(drop(ref))}
-    >
+    <Container onClick={ChangeFocus} ref={(ref) => drag(drop(ref))}>
       <SurveyCard focused={item.focus}>
         <ItemHeader
           title={item.title}
           itemType={item.itemType}
           focused={item.focus}
         />
-        <ItemContent />
+        <ItemContent itemType={item.itemType} question={item.question} />
         {item.focus && <ItemActionArea />}
       </SurveyCard>
     </Container>
@@ -73,6 +70,7 @@ Item.propTypes = {
     focus: PropType.bool.isRequired,
     title: PropType.string.isRequired,
     itemType: PropType.string.isRequired,
+    question: PropType.object.isRequired,
   }).isRequired,
   findItem: PropType.func.isRequired,
 };

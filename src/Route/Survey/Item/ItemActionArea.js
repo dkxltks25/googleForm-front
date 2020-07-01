@@ -41,7 +41,7 @@ export default () => {
     dispatch,
   ]);
   return (
-    <Container onMouseDown={(e)=>e.preventDefault()}>
+    <Container onMouseDown={(e) => e.preventDefault()}>
       <EmptyArea />
       <ItemIconButtonList>
         <IconButton
