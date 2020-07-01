@@ -112,3 +112,12 @@ export const ACTION_MOVE_ITEM = (id, targetIndex) => ({
   id,
   targetIndex,
 });
+
+// 객관식 질문 추가
+export const AddMultipleChoiceQuestions = "ADD_MULTIPLE_CHOICE_QUESTIONS";
+
+export const ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS = (parentId) =>({
+  type:AddMultipleChoiceQuestions,
+  parentId,
+  
+})

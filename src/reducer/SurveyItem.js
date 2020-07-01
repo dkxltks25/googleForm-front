@@ -10,10 +10,11 @@ import {
   AddItemTitle,
   ChangeItemType,
   MoveItem,
+  AddMultipleChoiceQuestions,
 } from "../actions";
 
 let ItemId = 1;
-// let QuestionId = 1;
+let QuestionId = 1;
 
 const InitalState = [
   {
@@ -46,6 +47,12 @@ function getEmptySurvey(id) {
         title: "",
       },
     ],
+  };
+}
+function getEmptyQuestion(id) {
+  return {
+    id,
+    title: "",
   };
 }
 
@@ -130,9 +137,22 @@ function moveItem(state, id, targetIndex) {
   });
 }
 
+/* 객관식 질문 추가 */
+function addMultipleChoiceQuestions(state, parentId) {
+  QuestionId += 1;
+  return state.map((item) =>
+    item.id === parentId
+      ? {
+          ...item,
+          question: [...item.question, getEmptyQuestion(QuestionId)],
+        }
+      : item
+  );
+}
+
 const SurveyItemReducer = (state = InitalState, action) => {
   switch (action.type) {
-    case AddItem:    // 항목추가
+    case AddItem: // 항목추가
       return addItem(state);
     case ChangeFocusItem: // 포커스변경
       return changeFocusItem(state, action.id);
@@ -146,6 +166,8 @@ const SurveyItemReducer = (state = InitalState, action) => {
       return changeItemType(state, action.itemType);
     case MoveItem: // 설문지 위치 변경
       return moveItem(state, action.id, action.targetIndex);
+    case AddMultipleChoiceQuestions: // 설문지 항목 추가
+      return addMultipleChoiceQuestions(state, action.parentId);
     default:
       return state;
   }
