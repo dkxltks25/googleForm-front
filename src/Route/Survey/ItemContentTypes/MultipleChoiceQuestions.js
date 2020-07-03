@@ -1,8 +1,14 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import { styled, TextField, IconButton, Radio } from "@material-ui/core";
 import { Cancel, DragIndicator, Image } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
-import { ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS } from "../../../actions";
+import PropType from "prop-types";
+
+import {
+  ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS,
+  ACTION_CHANGE_MULTIPLE_CHOICE_QUESTIONS_TITLE,
+  ACTION_DELETE_MULTIPLE_CHOICE_QUESTIONS,
+} from "../../../actions";
 
 // 이벤트에 해당하는 줄
 const Container = styled("div")({
@@ -47,36 +53,57 @@ const QuestionAdd = styled(TextField)({
   width: 80,
 });
 
-export default ({ id, question }) => {
-  //console.log(question);
+const Question = ({ parentId, id, title }) => {
   const dispatch = useDispatch();
-  const [columnValue, setColumnValue] = useState("열 이름");
-  const handleChange = (event) => {
-    setColumnValue(event.currentTaret.value);
-  };
-  const AddQuestion = useCallback(
-    () => dispatch(ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS(id)),
+  const ChangeQuestionTitle = useCallback(
+    (e) =>
+      dispatch(
+        ACTION_CHANGE_MULTIPLE_CHOICE_QUESTIONS_TITLE(
+          parentId,
+          id,
+          e.currentTarget.value
+        )
+      ),
     [dispatch]
   );
+  const DeleteQuestion = useCallback(
+    () => dispatch(ACTION_DELETE_MULTIPLE_CHOICE_QUESTIONS(parentId, id)),
+    [dispatch, id]
+  );
+  return (
+    <QuestionLine>
+      <QuestionDragIcon />
+      <QuestiionWrap>
+        <QuestionRadio />
+        <QuestionTextFiled
+          id="standard-basic"
+          value={title}
+          onChange={ChangeQuestionTitle}
+        />
+
+        <QuestionImage>
+          <Image />
+        </QuestionImage>
+        <QuestionCancel onClick={DeleteQuestion}>
+          <Cancel />
+        </QuestionCancel>
+      </QuestiionWrap>
+    </QuestionLine>
+  );
+};
+
+const MultipleChoiceQuestions = ({ id: parentId, question }) => {
+  const dispatch = useDispatch();
+  const AddQuestion = useCallback(
+    () => dispatch(ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS(parentId)),
+    [dispatch]
+  );
+
   return (
     <Container>
-     {question.map(item=>(
- <QuestionLine>
- <QuestionDragIcon />
- <QuestiionWrap>
-   <QuestionRadio />
-   <QuestionTextFiled value={columnValue} onChange={handleChange} />
-   <QuestionImage>
-     <Image />
-   </QuestionImage>
-   <QuestionCancel>
-     <Cancel />
-   </QuestionCancel>
- </QuestiionWrap>
-</QuestionLine>
-     ))}
-     
-
+      {question.map(({ id, title }) => (
+        <Question key={id} id={id} title={title} parentId={parentId} />
+      ))}
       <QuestionLine>
         <QuestionActionArea>
           <QuestionRadio />
@@ -86,3 +113,11 @@ export default ({ id, question }) => {
     </Container>
   );
 };
+
+MultipleChoiceQuestions.propTypes = {
+  id: PropType.number.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  question: PropType.array.isRequired,
+};
+
+export default MultipleChoiceQuestions;

@@ -11,7 +11,10 @@ import {
   ChangeItemType,
   MoveItem,
   AddMultipleChoiceQuestions,
+  ChangeMultipleChoiceQuestionsTitle,
+  DeleteMultipleChoiceQuestions,
 } from "../actions";
+import MultipleChoiceQuestions from "../Route/Survey/ItemContentTypes/MultipleChoiceQuestions";
 
 let ItemId = 1;
 let QuestionId = 1;
@@ -149,7 +152,30 @@ function addMultipleChoiceQuestions(state, parentId) {
       : item
   );
 }
-
+/* 객관식 질문 제목명 변경 */
+function changeMultipleChoiceQuestionsTitle(state, parentId, id, text) {
+  return state.map((item) =>
+    item.id === parentId
+      ? {
+          ...item,
+          question: item.question.map((question) =>
+            question.id === id ? { ...question, title: text } : question
+          ),
+        }
+      : item
+  );
+}
+/* 객관식 질문 삭제*/
+function deleteMultipleChoiceQuestions(state, parentId, id) {
+  return state.map((item) =>
+    item.id === parentId
+      ? {
+          ...item,
+          question: item.question.filter((question) => question.id !== id),
+        }
+      : item
+  );
+}
 const SurveyItemReducer = (state = InitalState, action) => {
   switch (action.type) {
     case AddItem: // 항목추가
@@ -168,6 +194,15 @@ const SurveyItemReducer = (state = InitalState, action) => {
       return moveItem(state, action.id, action.targetIndex);
     case AddMultipleChoiceQuestions: // 설문지 항목 추가
       return addMultipleChoiceQuestions(state, action.parentId);
+    case ChangeMultipleChoiceQuestionsTitle:
+      return changeMultipleChoiceQuestionsTitle(
+        state,
+        action.parentId,
+        action.id,
+        action.text
+      );
+    case DeleteMultipleChoiceQuestions: // 설문지 항목 삭제
+      return deleteMultipleChoiceQuestions(state, action.parentId, action.id);
     default:
       return state;
   }

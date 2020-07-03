@@ -59,7 +59,7 @@ const ItemHeader = ({ title, itemType, focused }) => {
         <DragIcon />
       </DragArea>
       {focused ? (
-        <InputTitleAndType onMouseDown={(e) => e.preventDefault()}>
+        <InputTitleAndType onMouseMove={(e) => e.preventDefault()}>
           <ItemTitle
             variant="filled"
             placeholder="제목"

@@ -20,7 +20,7 @@ const Item = ({ item, findItem }) => {
   const ChangeFocus = useCallback(() => {
     dispatch(ACTION_CHANGE_FOCUS(item.id));
   }, [item.id, dispatch]);
-  const dragRef = useRef(null);
+  // const dragRef = useRef(null);
   const originalIndex = findItem(item.id);
   // eslint-disable-next-line no-unused-vars
   const [{ isDragging }, drag] = useDrag({

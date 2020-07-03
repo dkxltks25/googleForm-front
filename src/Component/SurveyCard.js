@@ -25,7 +25,7 @@ const WrapCard = styled(Card)({
 
 const SurveyCard = ({ children, focused = true }) => {
   return (
-    <Container>
+    <Container >
       {focused ? <HoverBar /> : <EmptyBar />}
       <WrapCard>{children}</WrapCard>
     </Container>

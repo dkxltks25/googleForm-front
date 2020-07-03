@@ -116,8 +116,31 @@ export const ACTION_MOVE_ITEM = (id, targetIndex) => ({
 // 객관식 질문 추가
 export const AddMultipleChoiceQuestions = "ADD_MULTIPLE_CHOICE_QUESTIONS";
 
-export const ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS = (parentId) =>({
-  type:AddMultipleChoiceQuestions,
+export const ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS = (parentId) => ({
+  type: AddMultipleChoiceQuestions,
   parentId,
-  
-})
+});
+
+// 객관식 질문 이름 변경
+export const ChangeMultipleChoiceQuestionsTitle =
+  "CHANGE_MULTIPLE_CHOICE_QUESTIONS_TITLE";
+
+export const ACTION_CHANGE_MULTIPLE_CHOICE_QUESTIONS_TITLE = (
+  parentId,
+  id,
+  text
+) => ({
+  type: ChangeMultipleChoiceQuestionsTitle,
+  parentId,
+  id,
+  text,
+});
+
+// 객관식 질문 삭제
+export const DeleteMultipleChoiceQuestions = "DELETE_MULTIPLE_CHOICE_QUESTIONS";
+
+export const ACTION_DELETE_MULTIPLE_CHOICE_QUESTIONS = (parentId, id) => ({
+  type: DeleteMultipleChoiceQuestions,
+  parentId,
+  id,
+});

@@ -52,7 +52,7 @@ const ItemTypes = ({ itemType, id, question }) => {
 };
 
 const ItemContent = ({ itemType, question, id }) => (
-  <Container onMouseDown={(e) => e.preventDefault()}>
+  <Container onMouseMove={(e) => e.preventDefault()}>
     <ItemTypes itemType={itemType} question={question} id={id} />
   </Container>
 );
