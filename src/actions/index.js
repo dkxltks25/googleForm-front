@@ -144,3 +144,14 @@ export const ACTION_DELETE_MULTIPLE_CHOICE_QUESTIONS = (parentId, id) => ({
   parentId,
   id,
 });
+
+/* 설문지 아이템 질문 드래그 앤 드롭 요청 */
+
+export const MoveItemQuestion = "MOVE_ITEM_QUESTION";
+
+export const ACTION_MOVE_ITEM_QUESTION = (parentId, id, targetIndex) => ({
+  type: MoveItemQuestion,
+  parentId,
+  id,
+  targetIndex,
+});

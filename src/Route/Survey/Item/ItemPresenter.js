@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, forwardRef } from "react";
+import React, { useCallback } from "react";
 import { styled } from "@material-ui/core";
 import PropType from "prop-types";
 import { useDispatch } from "react-redux";
@@ -60,7 +60,7 @@ const Item = ({ item, findItem }) => {
         <ItemContent
           id={item.id}
           itemType={item.itemType}
-          question={item.question}
+          questions={item.questions}
         />
         {item.focus && <ItemActionArea />}
       </SurveyCard>
@@ -74,7 +74,7 @@ Item.propTypes = {
     focus: PropType.bool.isRequired,
     title: PropType.string.isRequired,
     itemType: PropType.string.isRequired,
-    question: PropType.array.isRequired,
+    questions: PropType.array.isRequired,
   }).isRequired,
   findItem: PropType.func.isRequired,
 };

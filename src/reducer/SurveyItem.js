@@ -13,8 +13,8 @@ import {
   AddMultipleChoiceQuestions,
   ChangeMultipleChoiceQuestionsTitle,
   DeleteMultipleChoiceQuestions,
+  MoveItemQuestion,
 } from "../actions";
-import MultipleChoiceQuestions from "../Route/Survey/ItemContentTypes/MultipleChoiceQuestions";
 
 let ItemId = 1;
 let QuestionId = 1;
@@ -27,7 +27,7 @@ const InitalState = [
     description: "",
     focus: true,
     isEtc: false, // 기타 옵션 있는지 없는지
-    question: [
+    questions: [
       {
         id: 1,
         title: "",
@@ -44,7 +44,7 @@ function getEmptySurvey(id) {
     description: "",
     focus: true,
     isEtc: false, // 기타 옵션 있는지 없는지
-    question: [
+    questions: [
       {
         id: 1,
         title: "",
@@ -147,7 +147,7 @@ function addMultipleChoiceQuestions(state, parentId) {
     item.id === parentId
       ? {
           ...item,
-          question: [...item.question, getEmptyQuestion(QuestionId)],
+          questions: [...item.questions, getEmptyQuestion(QuestionId)],
         }
       : item
   );
@@ -158,24 +158,53 @@ function changeMultipleChoiceQuestionsTitle(state, parentId, id, text) {
     item.id === parentId
       ? {
           ...item,
-          question: item.question.map((question) =>
+          questions: item.questions.map((question) =>
             question.id === id ? { ...question, title: text } : question
           ),
         }
       : item
   );
 }
-/* 객관식 질문 삭제*/
+/* 객관식 질문 삭제 */
 function deleteMultipleChoiceQuestions(state, parentId, id) {
   return state.map((item) =>
     item.id === parentId
       ? {
           ...item,
-          question: item.question.filter((question) => question.id !== id),
+          questions: item.questions.filter((question) => question.id !== id),
         }
       : item
   );
 }
+
+// 아이템의 질문 찾기
+function findItemQuestion(state, parentId, id) {
+  const [{ questions }] = state.filter((item) => item.id === parentId);
+  const item = questions.filter((i) => i.id === id)[0];
+  return {
+    item,
+    index: questions.indexOf(item),
+  };
+}
+
+// 객관식 질문 드래그 앤 드롭
+function moveItemQuestion(state, parentId, id, targetIndex) {
+  const { item, index } = findItemQuestion(state, parentId, id);
+  return state.map((parentItem) =>
+    parentItem.id === parentId
+      ? {
+          ...parentItem,
+          questions: update(parentItem.questions, {
+            $splice: [
+              [index, 1],
+              [targetIndex, 0, item],
+            ],
+          }),
+        }
+      : parentItem
+  );
+}
+
 const SurveyItemReducer = (state = InitalState, action) => {
   switch (action.type) {
     case AddItem: // 항목추가
@@ -203,6 +232,13 @@ const SurveyItemReducer = (state = InitalState, action) => {
       );
     case DeleteMultipleChoiceQuestions: // 설문지 항목 삭제
       return deleteMultipleChoiceQuestions(state, action.parentId, action.id);
+    case MoveItemQuestion:
+      return moveItemQuestion(
+        state,
+        action.parentId,
+        action.id,
+        action.targetIndex
+      );
     default:
       return state;
   }

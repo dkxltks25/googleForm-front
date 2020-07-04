@@ -22,14 +22,14 @@ const ItemTypeIsJ = () => "날짜";
 const ItemTypeIsK = () => "시간";
 
 // eslint-disable-next-line react/prop-types
-const ItemTypes = ({ itemType, id, question }) => {
+const ItemTypes = ({ itemType, id, questions }) => {
   switch (itemType) {
     case types.ShortAnswer:
       return <ShortAnswer />;
     case types.Long:
       return <Long />;
     case types.MultipleChoiceQuestions:
-      return <MultipleChoiceQuestions id={id} question={question} />;
+      return <MultipleChoiceQuestions id={id} questions={questions} />;
     case types.CheckBox:
       return <ItemTypeIsD />;
     case types.DropDown:
@@ -51,16 +51,16 @@ const ItemTypes = ({ itemType, id, question }) => {
   }
 };
 
-const ItemContent = ({ itemType, question, id }) => (
+const ItemContent = ({ itemType, questions, id }) => (
   <Container onMouseMove={(e) => e.preventDefault()}>
-    <ItemTypes itemType={itemType} question={question} id={id} />
+    <ItemTypes itemType={itemType} questions={questions} id={id} />
   </Container>
 );
 
 ItemContent.propTypes = {
   itemType: PropType.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  question: PropType.array.isRequired,
+  questions: PropType.array.isRequired,
   id: PropType.number.isRequired,
 };
 
