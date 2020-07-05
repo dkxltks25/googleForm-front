@@ -20,7 +20,6 @@ const Item = ({ item, findItem }) => {
   const ChangeFocus = useCallback(() => {
     dispatch(ACTION_CHANGE_FOCUS(item.id));
   }, [item.id, dispatch]);
-  // const dragRef = useRef(null);
   const originalIndex = findItem(item.id);
   // eslint-disable-next-line no-unused-vars
   const [{ isDragging }, drag] = useDrag({
@@ -50,7 +49,15 @@ const Item = ({ item, findItem }) => {
   });
 
   return (
-    <Container onClick={ChangeFocus} ref={(ref) => drag(drop(ref))}>
+    <Container
+      onClick={() => {
+        if (item.focus) {
+          return;
+        }
+        ChangeFocus();
+      }}
+      ref={(ref) => drag(drop(ref))}
+    >
       <SurveyCard focused={item.focus}>
         <ItemHeader
           title={item.title}

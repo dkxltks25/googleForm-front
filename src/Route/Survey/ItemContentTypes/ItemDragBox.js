@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import PropType from "prop-types";
 import { useDrop, useDrag } from "react-dnd";
 
-import {} from "../Item/ItemDragType";
 import { useDispatch } from "react-redux";
 import { ACTION_MOVE_ITEM_QUESTION } from "../../../actions";
 
@@ -22,8 +21,7 @@ const ItemDragBox = ({ children, question, type, findQuestion, parentId }) => {
       const { id: dropeedId, originalIndex: originIndex } = monitor.getItem();
       const didDrop = monitor.didDrop();
       if (!didDrop) {
-        dispatch(ACTION_MOVE_ITEM_QUESTION(parentId, question.id, originIndex));
-        // dispatch(ACTION_MOVE_ITEM(dropeedId, originIndex));
+        //dispatch(ACTION_MOVE_ITEM_QUESTION(parentId, question.id, originIndex));
       }
     },
   });
@@ -49,6 +47,10 @@ ItemDragBox.propTypes = {
   children: PropType.node.isRequired,
   type: PropType.string.isRequired,
   findQuestion: PropType.func.isRequired,
+  question: PropType.shape({
+    id: PropType.number.isRequired,
+  }).isRequired,
+  parentId: PropType.number.isRequired,
 };
 
 export default ItemDragBox;
