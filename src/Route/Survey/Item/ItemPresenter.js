@@ -53,6 +53,7 @@ const Item = ({ item, findItem }) => {
   return (
     <Container
       onClick={() => {
+        // 중복되는 액션 전달 막기
         if (item.focus) {
           return;
         }

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useState } from "react";
 import { styled, TextField, IconButton, Typography } from "@material-ui/core";
 import { DragIndicator, Image } from "@material-ui/icons";
 import PropTypes from "prop-types";
@@ -47,6 +47,7 @@ const VisibleTitle = styled(Typography)({
   minWidth: 460,
 });
 
+// eslint-disable-next-line react/prop-types
 const ItemHeader = ({ title, itemType, focused, dropRef }) => {
   const dispatch = useDispatch();
   const [titleValue, setTitle] = useState(title);
@@ -59,7 +60,7 @@ const ItemHeader = ({ title, itemType, focused, dropRef }) => {
         <DragIcon />
       </DragArea>
       {focused ? (
-        <InputTitleAndType onMouseMove={(e) => e.preventDefault()}>
+        <InputTitleAndType>
           <ItemTitle
             variant="filled"
             placeholder="제목"
@@ -75,7 +76,7 @@ const ItemHeader = ({ title, itemType, focused, dropRef }) => {
           <Select itemType={itemType} />
         </InputTitleAndType>
       ) : (
-        <VisibleTitleWrap onMouseDown={(e) => e.preventDefault()}>
+        <VisibleTitleWrap>
           <VisibleTitle>{titleValue}</VisibleTitle>
         </VisibleTitleWrap>
       )}

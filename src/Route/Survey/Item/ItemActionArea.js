@@ -41,22 +41,13 @@ export default () => {
     dispatch,
   ]);
   return (
-    <Container onMouseDown={(e) => e.preventDefault()}>
+    <Container>
       <EmptyArea />
       <ItemIconButtonList>
-        <IconButton
-          onClick={(event) => {
-            CopyFocus();
-          }}
-        >
+        <IconButton onClick={CopyFocus}>
           <FilterNone />
         </IconButton>
-        <IconButton
-          onClick={(event) => {
-            event.stopPropagation();
-            RemoveFocus();
-          }}
-        >
+        <IconButton onClick={RemoveFocus}>
           <DeleteOutline />
         </IconButton>
         <DvideColumn />
