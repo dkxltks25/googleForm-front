@@ -46,7 +46,6 @@ export default () => {
       <ItemIconButtonList>
         <IconButton
           onClick={(event) => {
-            event.stopPropagation();
             CopyFocus();
           }}
         >

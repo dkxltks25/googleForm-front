@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { styled } from "@material-ui/core";
 import PropType from "prop-types";
 import { useDispatch } from "react-redux";
@@ -22,11 +22,12 @@ const Item = ({ item, findItem }) => {
   }, [item.id, dispatch]);
   const originalIndex = findItem(item.id);
   // eslint-disable-next-line no-unused-vars
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging, canDrag }, drag, preview] = useDrag({
     item: { type: dataType.item, id: item.id, originalIndex },
     collect: (monitor) => {
       return {
         isDragging: monitor.isDragging(),
+        canDrag: monitor.canDrag(),
       };
     },
     end: (dropResult, monitor) => {
@@ -47,7 +48,8 @@ const Item = ({ item, findItem }) => {
       }
     },
   });
-
+  const DropRef = useRef(null);
+  drag(drop(DropRef));
   return (
     <Container
       onClick={() => {
@@ -56,13 +58,14 @@ const Item = ({ item, findItem }) => {
         }
         ChangeFocus();
       }}
-      ref={(ref) => drag(drop(ref))}
+      ref={preview}
     >
       <SurveyCard focused={item.focus}>
         <ItemHeader
           title={item.title}
           itemType={item.itemType}
           focused={item.focus}
+          dropRef={DropRef}
         />
         <ItemContent
           id={item.id}

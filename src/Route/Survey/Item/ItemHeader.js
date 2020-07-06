@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import { styled, TextField, IconButton, Typography } from "@material-ui/core";
 import { DragIndicator, Image } from "@material-ui/icons";
 import PropTypes from "prop-types";
@@ -47,7 +47,7 @@ const VisibleTitle = styled(Typography)({
   minWidth: 460,
 });
 
-const ItemHeader = ({ title, itemType, focused }) => {
+const ItemHeader = ({ title, itemType, focused, dropRef }) => {
   const dispatch = useDispatch();
   const [titleValue, setTitle] = useState(title);
   const handleChangeTitle = useCallback(() => {
@@ -55,7 +55,7 @@ const ItemHeader = ({ title, itemType, focused }) => {
   }, [dispatch, titleValue]);
   return (
     <>
-      <DragArea>
+      <DragArea ref={dropRef}>
         <DragIcon />
       </DragArea>
       {focused ? (
