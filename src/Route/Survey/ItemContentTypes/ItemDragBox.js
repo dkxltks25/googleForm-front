@@ -17,7 +17,7 @@ const ItemDragIndicator = styled(DragIndicator)({
   color: "#ede7f6",
   cursor: "move",
 });
-
+const DragArea = styled("div")({});
 const QuestionLine = styled("div")({
   width: "100%",
   display: "flex",
@@ -104,16 +104,16 @@ const DragQuestion = ({ findQuestion, question, parentId, type }) => {
     hover({ id: draggedId }) {
       if (draggedId !== question.id) {
         const { index: overIndex } = findQuestion(question.id);
-        dispatch(ACTION_MOVE_ITEM_QUESTION(parentId, question.id, overIndex));
+        dispatch(ACTION_MOVE_ITEM_QUESTION(parentId, draggedId, overIndex));
       }
     },
   });
-  const dropAreaRef = useRef(null);
-  drag(drop(dropAreaRef));
+
   return (
     <DragContainer ref={preview}>
       <Question
-        dndRef={dropAreaRef}
+        drag={drag}
+        drop={drop}
         parentId={parentId}
         id={question.id}
         title={question.title}
@@ -141,13 +141,12 @@ DragQuestion.propTypes = {
 
 // Question
 // eslint-disable-next-line no-unused-vars
-const Question = ({ parentId, id, title, dndRef }) => {
+const Question = ({ parentId, id, title, drag, drop }) => {
   return (
     <QuestionLine>
-      <div ref={dndRef}>
+      <DragArea ref={(ref) => drag(drop(ref))}>
         <ItemDragIndicator />
-      </div>
-
+      </DragArea>
       <QuestiionWrap>
         <QuestionRadio />
         <QuestionTextFiled id="standard-basic" value={title} />
@@ -165,4 +164,6 @@ Question.propTypes = {
   parentId: PropType.number.isRequired,
   id: PropType.number.isRequired,
   title: PropType.string.isRequired,
+  drag: PropType.func.isRequired,
+  drop: PropType.func.isRequired,
 };
