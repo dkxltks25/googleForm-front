@@ -150,3 +150,21 @@ export const ACTION_MOVE_ITEM_QUESTION = (parentId, id, targetIndex) => ({
   id,
   targetIndex,
 });
+
+/* 설문지 아이템 기타 추가 */
+
+export const AddItemQuestionEtc = "ADD_ITEM_QUESTION_ETC";
+
+export const ACTION_ADD_ITEM_QUESTION_ETC = (parentId) => ({
+  type: AddItemQuestionEtc,
+  parentId,
+});
+
+/* 설문지 아이템 기타 삭제 */
+
+export const RemoveItemQuestionEtc = "REMOVE_ITEM_QUESTION_ETC";
+
+export const ACTION_REMOVE_ITEM_QUESTION_ETC = (parentId) => ({
+  type: RemoveItemQuestionEtc,
+  parentId,
+});

@@ -14,6 +14,8 @@ import {
   ChangeItemQuestionsTitle,
   DeleteItemQuestions,
   MoveItemQuestion,
+  AddItemQuestionEtc,
+  RemoveItemQuestionEtc,
 } from "../actions";
 
 let ItemId = 1;
@@ -205,6 +207,21 @@ function moveItemQuestion(state, parentId, id, targetIndex) {
   );
 }
 
+// 기타 질문 추가
+
+function addItemQuestionEtc(state, parentId) {
+  return state.map((item) =>
+    item.id === parentId ? { ...item, isEtc: true } : item
+  );
+}
+
+// 기타 질문 삭제
+function removeItemQuestionEtc(state, parentId) {
+  return state.map((item) =>
+    item.id === parentId ? { ...item, isEtc: false } : item
+  );
+}
+
 const SurveyItemReducer = (state = InitalState, action) => {
   switch (action.type) {
     case AddItem: // 항목추가
@@ -239,6 +256,10 @@ const SurveyItemReducer = (state = InitalState, action) => {
         action.id,
         action.targetIndex
       );
+    case AddItemQuestionEtc:
+      return addItemQuestionEtc(state, action.parentId);
+    case RemoveItemQuestionEtc:
+      return removeItemQuestionEtc(state, action.parentId);
     default:
       return state;
   }

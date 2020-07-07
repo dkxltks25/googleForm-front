@@ -13,7 +13,6 @@ const Container = styled("div")({
 });
 
 const ItemTypeIsA = () => "단답형";
-const ItemTypeIsD = () => "체크박스";
 const ItemTypeIsE = () => "드롭다운";
 const ItemTypeIsF = () => "파일업로드";
 const ItemTypeIsG = () => "직선단계";
@@ -23,16 +22,18 @@ const ItemTypeIsJ = () => "날짜";
 const ItemTypeIsK = () => "시간";
 
 // eslint-disable-next-line react/prop-types
-const ItemTypes = ({ itemType, id, questions }) => {
+const ItemTypes = ({ itemType, id, questions, isEtc }) => {
   switch (itemType) {
     case types.ShortAnswer:
       return <ShortAnswer />;
     case types.Long:
       return <Long />;
     case types.MultipleChoiceQuestions:
-      return <MultipleChoiceQuestions id={id} questions={questions} />;
+      return (
+        <MultipleChoiceQuestions id={id} questions={questions} isEtc={isEtc} />
+      );
     case types.CheckBox:
-      return <CheckBox id={id} questions={questions} />;
+      return <CheckBox id={id} questions={questions} isEtc={isEtc} />;
     case types.DropDown:
       return <ItemTypeIsE />;
     case types.FileUpload:
@@ -52,9 +53,14 @@ const ItemTypes = ({ itemType, id, questions }) => {
   }
 };
 
-const ItemContent = ({ itemType, questions, id }) => (
+const ItemContent = ({ itemType, questions, id, isEtc }) => (
   <Container>
-    <ItemTypes itemType={itemType} questions={questions} id={id} />
+    <ItemTypes
+      itemType={itemType}
+      questions={questions}
+      id={id}
+      isEtc={isEtc}
+    />
   </Container>
 );
 
@@ -63,6 +69,7 @@ ItemContent.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   questions: PropType.array.isRequired,
   id: PropType.number.isRequired,
+  isEtc: PropType.bool.isRequired,
 };
 
 export default ItemContent;

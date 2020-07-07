@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useCallback } from "react";
 import PropType from "prop-types";
 import { useDrop, useDrag } from "react-dnd";
 import {
@@ -7,7 +7,6 @@ import {
   TextField,
   Radio,
   Checkbox,
-  FormControlLabel,
 } from "@material-ui/core";
 import { DragIndicator, Image, Cancel, CheckBox } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
@@ -44,10 +43,10 @@ const QuestionRadio = styled(Radio)({
   width: 12,
   height: 12,
 });
-const QuestionCheck = styled(CheckBox)({
-  width: 36,
-  height: 36,
-});
+// const QuestionCheck = styled(CheckBox)({
+//   width: 36,
+//   height: 36,
+// });
 
 const QuestionTextFiled = styled(TextField)({
   flexGrow: 2,

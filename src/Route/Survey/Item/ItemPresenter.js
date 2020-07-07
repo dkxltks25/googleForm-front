@@ -72,6 +72,7 @@ const Item = ({ item, findItem }) => {
           id={item.id}
           itemType={item.itemType}
           questions={item.questions}
+          isEtc={item.isEtc}
         />
         {item.focus && <ItemActionArea />}
       </SurveyCard>
@@ -88,6 +89,7 @@ Item.propTypes = {
     questions: PropType.array.isRequired,
   }).isRequired,
   findItem: PropType.func.isRequired,
+  isEtc: PropType.bool.isRequired,
 };
 
 export default Item;
