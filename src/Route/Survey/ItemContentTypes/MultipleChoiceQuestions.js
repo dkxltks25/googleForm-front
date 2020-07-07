@@ -7,6 +7,7 @@ import {
   Button,
   IconButton,
 } from "@material-ui/core";
+import { Cancel } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import PropType from "prop-types";
 
@@ -18,7 +19,6 @@ import {
 } from "../../../actions";
 import dataType from "../Item/ItemDragType";
 import ItemDragBox from "./ItemDragBox";
-import { Cancel } from "@material-ui/icons";
 
 // 이벤트에 해당하는 줄
 const Container = styled("div")({

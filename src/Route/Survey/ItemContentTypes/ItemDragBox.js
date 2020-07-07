@@ -7,8 +7,9 @@ import {
   TextField,
   Radio,
   Checkbox,
+  Typography,
 } from "@material-ui/core";
-import { DragIndicator, Image, Cancel, CheckBox } from "@material-ui/icons";
+import { DragIndicator, Image, Cancel, Compare } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 
 import { itemType as CompareItemType } from "../../../word";
@@ -47,7 +48,9 @@ const QuestionRadio = styled(Radio)({
 //   width: 36,
 //   height: 36,
 // });
-
+const QUestionNumber = styled(Typography)({
+  padding: 8,
+});
 const QuestionTextFiled = styled(TextField)({
   flexGrow: 2,
 });
@@ -68,7 +71,7 @@ const ItemDragBox = ({ questions, type, parentId, itemType }) => {
   const [, drop] = useDrop({ accept: type });
   return (
     <DropContainer ref={(ref) => drop(ref)}>
-      {questions.map((question) => (
+      {questions.map((question, index) => (
         <DragQuestion
           key={question.id}
           findQuestion={findQuestion}
@@ -76,6 +79,7 @@ const ItemDragBox = ({ questions, type, parentId, itemType }) => {
           parentId={parentId}
           type={type}
           itemType={itemType}
+          index={index}
         />
       ))}
     </DropContainer>
@@ -94,7 +98,14 @@ ItemDragBox.propTypes = {
 
 export default ItemDragBox;
 
-const DragQuestion = ({ findQuestion, question, parentId, type, itemType }) => {
+const DragQuestion = ({
+  findQuestion,
+  question,
+  parentId,
+  type,
+  itemType,
+  index,
+}) => {
   const dispatch = useDispatch();
   const originalIndex = findQuestion(question.id);
   // eslint-disable-next-line no-unused-vars
@@ -134,6 +145,7 @@ const DragQuestion = ({ findQuestion, question, parentId, type, itemType }) => {
         id={question.id}
         title={question.title}
         itemType={itemType}
+        index={index}
       />
     </DragContainer>
   );
@@ -151,7 +163,7 @@ DragQuestion.propTypes = {
 };
 
 // Question
-const Question = ({ parentId, id, title, drag, drop, itemType }) => {
+const Question = ({ parentId, id, title, drag, drop, itemType, index }) => {
   const dispatch = useDispatch();
   const ChangeQuestionTitle = useCallback(
     (e) =>
@@ -178,6 +190,9 @@ const Question = ({ parentId, id, title, drag, drop, itemType }) => {
         )}
         {itemType === CompareItemType.MultipleChoiceQuestions && (
           <QuestionRadio checked={false} disabled />
+        )}
+        {itemType === CompareItemType.DropDown && (
+          <QUestionNumber>{index + 1}</QUestionNumber>
         )}
         <QuestionTextFiled
           id="standard-basic"

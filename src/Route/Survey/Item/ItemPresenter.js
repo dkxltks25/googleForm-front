@@ -87,9 +87,9 @@ Item.propTypes = {
     title: PropType.string.isRequired,
     itemType: PropType.string.isRequired,
     questions: PropType.array.isRequired,
+    isEtc: PropType.bool.isRequired,
   }).isRequired,
   findItem: PropType.func.isRequired,
-  isEtc: PropType.bool.isRequired,
 };
 
 export default Item;
