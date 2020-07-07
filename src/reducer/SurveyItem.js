@@ -10,9 +10,9 @@ import {
   AddItemTitle,
   ChangeItemType,
   MoveItem,
-  AddMultipleChoiceQuestions,
-  ChangeMultipleChoiceQuestionsTitle,
-  DeleteMultipleChoiceQuestions,
+  AddItemQuestions,
+  ChangeItemQuestionsTitle,
+  DeleteItemQuestions,
   MoveItemQuestion,
 } from "../actions";
 
@@ -141,7 +141,7 @@ function moveItem(state, id, targetIndex) {
 }
 
 /* 객관식 질문 추가 */
-function addMultipleChoiceQuestions(state, parentId) {
+function addItemQuestions(state, parentId) {
   QuestionId += 1;
   return state.map((item) =>
     item.id === parentId
@@ -153,7 +153,7 @@ function addMultipleChoiceQuestions(state, parentId) {
   );
 }
 /* 객관식 질문 제목명 변경 */
-function changeMultipleChoiceQuestionsTitle(state, parentId, id, text) {
+function changeItemQuestionsTitle(state, parentId, id, text) {
   return state.map((item) =>
     item.id === parentId
       ? {
@@ -166,7 +166,7 @@ function changeMultipleChoiceQuestionsTitle(state, parentId, id, text) {
   );
 }
 /* 객관식 질문 삭제 */
-function deleteMultipleChoiceQuestions(state, parentId, id) {
+function deleteItemQuestions(state, parentId, id) {
   return state.map((item) =>
     item.id === parentId
       ? {
@@ -221,17 +221,17 @@ const SurveyItemReducer = (state = InitalState, action) => {
       return changeItemType(state, action.itemType);
     case MoveItem: // 설문지 위치 변경
       return moveItem(state, action.id, action.targetIndex);
-    case AddMultipleChoiceQuestions: // 설문지 항목 추가
-      return addMultipleChoiceQuestions(state, action.parentId);
-    case ChangeMultipleChoiceQuestionsTitle:
-      return changeMultipleChoiceQuestionsTitle(
+    case AddItemQuestions: // 설문지 항목 추가
+      return addItemQuestions(state, action.parentId);
+    case ChangeItemQuestionsTitle:
+      return changeItemQuestionsTitle(
         state,
         action.parentId,
         action.id,
         action.text
       );
-    case DeleteMultipleChoiceQuestions: // 설문지 항목 삭제
-      return deleteMultipleChoiceQuestions(state, action.parentId, action.id);
+    case DeleteItemQuestions: // 설문지 항목 삭제
+      return deleteItemQuestions(state, action.parentId, action.id);
     case MoveItemQuestion:
       return moveItemQuestion(
         state,

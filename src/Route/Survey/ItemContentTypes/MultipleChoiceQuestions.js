@@ -3,13 +3,8 @@ import { styled, TextField, Radio } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import PropType from "prop-types";
 
-import {
-  ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS,
-  // eslint-disable-next-line no-unused-vars
-  ACTION_CHANGE_MULTIPLE_CHOICE_QUESTIONS_TITLE,
-  // eslint-disable-next-line no-unused-vars
-  ACTION_DELETE_MULTIPLE_CHOICE_QUESTIONS,
-} from "../../../actions";
+import { itemType } from "../../../word";
+import { ACTION_ADD_ITEM_QUESTIONS } from "../../../actions";
 import dataType from "../Item/ItemDragType";
 import ItemDragBox from "./ItemDragBox";
 
@@ -41,33 +36,18 @@ const MultipleChoiceQuestions = ({ id: parentId, questions }) => {
   const [questionText, setQuestionText] = useState("");
   const questionAddRef = useRef(null);
   const AddQuestion = useCallback(() => {
-    dispatch(ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS(parentId));
+    dispatch(ACTION_ADD_ITEM_QUESTIONS(parentId));
   }, [dispatch]);
   const changeQuestionText = () => {
     setQuestionText("");
   };
-  // const ChangeQuestionTitle = useCallback(
-  //   (e) =>
-  //     dispatch(
-  //       ACTION_CHANGE_MULTIPLE_CHOICE_QUESTIONS_TITLE(
-  //         parentId,
-  //         id,
-  //         e.currentTarget.value
-  //       )
-  //     ),
-  //   [dispatch]
-  // );
-  // const DeleteQuestion = useCallback(
-  //   () => dispatch(ACTION_DELETE_MULTIPLE_CHOICE_QUESTIONS(parentId, id)),
-  //   [dispatch, id]
-  // );
-
   return (
     <Container>
       <ItemDragBox
         questions={questions}
         parentId={parentId}
         type={dataType.question}
+        itemType={itemType.MultipleChoiceQuestions}
       />
       <QuestionLine>
         <QuestionActionArea>

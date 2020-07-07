@@ -1,11 +1,23 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import PropType from "prop-types";
 import { useDrop, useDrag } from "react-dnd";
-import { styled, IconButton, TextField, Radio } from "@material-ui/core";
-import { DragIndicator, Image, Cancel } from "@material-ui/icons";
+import {
+  styled,
+  IconButton,
+  TextField,
+  Radio,
+  Checkbox,
+  FormControlLabel,
+} from "@material-ui/core";
+import { DragIndicator, Image, Cancel, CheckBox } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 
-import { ACTION_MOVE_ITEM_QUESTION } from "../../../actions";
+import { itemType as CompareItemType } from "../../../word";
+import {
+  ACTION_MOVE_ITEM_QUESTION,
+  ACTION_CHANGE_ITEM_QUESTIONS_TITLE,
+  ACTION_DELETE_ITEM_QUESTIONS,
+} from "../../../actions";
 
 // const QuestionContainer = styled("div")({
 //   paddingTop: 24,
@@ -32,6 +44,10 @@ const QuestionRadio = styled(Radio)({
   width: 12,
   height: 12,
 });
+const QuestionCheck = styled(CheckBox)({
+  width: 36,
+  height: 36,
+});
 
 const QuestionTextFiled = styled(TextField)({
   flexGrow: 2,
@@ -42,7 +58,7 @@ const QuestionCancel = styled(IconButton)({});
 const DropContainer = styled("div")({});
 const DragContainer = styled("div")({});
 
-const ItemDragBox = ({ questions, type, parentId }) => {
+const ItemDragBox = ({ questions, type, parentId, itemType }) => {
   const findQuestion = (id) => {
     const item = questions.filter((i) => i.id === id)[0];
     return {
@@ -60,6 +76,7 @@ const ItemDragBox = ({ questions, type, parentId }) => {
           question={question}
           parentId={parentId}
           type={type}
+          itemType={itemType}
         />
       ))}
     </DropContainer>
@@ -73,11 +90,12 @@ ItemDragBox.propTypes = {
     })
   ).isRequired,
   parentId: PropType.number.isRequired,
+  itemType: PropType.string.isRequired,
 };
 
 export default ItemDragBox;
 
-const DragQuestion = ({ findQuestion, question, parentId, type }) => {
+const DragQuestion = ({ findQuestion, question, parentId, type, itemType }) => {
   const dispatch = useDispatch();
   const originalIndex = findQuestion(question.id);
   // eslint-disable-next-line no-unused-vars
@@ -90,11 +108,10 @@ const DragQuestion = ({ findQuestion, question, parentId, type }) => {
       };
     },
     end: (dropResult, monitor) => {
-      // eslint-disable-next-line no-unused-vars
       const { id: dropeedId, originalIndex: originIndex } = monitor.getItem();
       const didDrop = monitor.didDrop();
       if (!didDrop) {
-        dispatch(ACTION_MOVE_ITEM_QUESTION(parentId, question.id, originIndex));
+        dispatch(ACTION_MOVE_ITEM_QUESTION(parentId, dropeedId, originIndex));
       }
     },
   });
@@ -117,6 +134,7 @@ const DragQuestion = ({ findQuestion, question, parentId, type }) => {
         parentId={parentId}
         id={question.id}
         title={question.title}
+        itemType={itemType}
       />
     </DragContainer>
   );
@@ -130,30 +148,47 @@ DragQuestion.propTypes = {
   }).isRequired,
   parentId: PropType.number.isRequired,
   type: PropType.string.isRequired,
+  itemType: PropType.string.isRequired,
 };
-/*
-  드래그 컨테이너 드롭 area (드래그 한 대상을 놓을 수 있는 공간)
-    드래그 할 수 있는 블록들 
-      드래그 인디케이터 아이콘
-      내용
-   
-*/
 
 // Question
-// eslint-disable-next-line no-unused-vars
-const Question = ({ parentId, id, title, drag, drop }) => {
+const Question = ({ parentId, id, title, drag, drop, itemType }) => {
+  const dispatch = useDispatch();
+  const ChangeQuestionTitle = useCallback(
+    (e) =>
+      dispatch(
+        ACTION_CHANGE_ITEM_QUESTIONS_TITLE(parentId, id, e.currentTarget.value)
+      ),
+    [dispatch]
+  );
+  const DeleteQuestion = useCallback(
+    () => dispatch(ACTION_DELETE_ITEM_QUESTIONS(parentId, id)),
+    [dispatch, id]
+  );
   return (
     <QuestionLine>
       <DragArea ref={(ref) => drag(drop(ref))}>
         <ItemDragIndicator />
       </DragArea>
       <QuestiionWrap>
-        <QuestionRadio />
-        <QuestionTextFiled id="standard-basic" value={title} />
+        {itemType === CompareItemType.CheckBox && (
+          <Checkbox
+            disabled
+            inputProps={{ "aria-label": "disabled checkbox" }}
+          />
+        )}
+        {itemType === CompareItemType.MultipleChoiceQuestions && (
+          <QuestionRadio checked={false} disabled />
+        )}
+        <QuestionTextFiled
+          id="standard-basic"
+          value={title}
+          onChange={ChangeQuestionTitle}
+        />
         <QuestionImage>
           <Image />
         </QuestionImage>
-        <QuestionCancel>
+        <QuestionCancel onClick={DeleteQuestion}>
           <Cancel />
         </QuestionCancel>
       </QuestiionWrap>
@@ -166,4 +201,5 @@ Question.propTypes = {
   title: PropType.string.isRequired,
   drag: PropType.func.isRequired,
   drop: PropType.func.isRequired,
+  itemType: PropType.string.isRequired,
 };

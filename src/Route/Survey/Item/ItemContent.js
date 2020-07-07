@@ -5,6 +5,7 @@ import PropType from "prop-types";
 import ShortAnswer from "../ItemContentTypes/ShortAnser";
 import Long from "../ItemContentTypes/Long";
 import MultipleChoiceQuestions from "../ItemContentTypes/MultipleChoiceQuestions";
+import CheckBox from "../ItemContentTypes/CheckBox";
 import { itemType as types } from "../../../word";
 
 const Container = styled("div")({
@@ -31,7 +32,7 @@ const ItemTypes = ({ itemType, id, questions }) => {
     case types.MultipleChoiceQuestions:
       return <MultipleChoiceQuestions id={id} questions={questions} />;
     case types.CheckBox:
-      return <ItemTypeIsD />;
+      return <CheckBox id={id} questions={questions} />;
     case types.DropDown:
       return <ItemTypeIsE />;
     case types.FileUpload:

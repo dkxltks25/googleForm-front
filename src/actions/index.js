@@ -114,33 +114,28 @@ export const ACTION_MOVE_ITEM = (id, targetIndex) => ({
 });
 
 // 객관식 질문 추가
-export const AddMultipleChoiceQuestions = "ADD_MULTIPLE_CHOICE_QUESTIONS";
+export const AddItemQuestions = "ADD_ITEM_QUESTIONS";
 
-export const ACTION_ADD_MULTIPLE_CHOICE_QUESTIONS = (parentId) => ({
-  type: AddMultipleChoiceQuestions,
+export const ACTION_ADD_ITEM_QUESTIONS = (parentId) => ({
+  type: AddItemQuestions,
   parentId,
 });
 
-// 객관식 질문 이름 변경
-export const ChangeMultipleChoiceQuestionsTitle =
-  "CHANGE_MULTIPLE_CHOICE_QUESTIONS_TITLE";
+// 아이템 질문(체크박스,객관식,드롭다운) 이름 변경
+export const ChangeItemQuestionsTitle = "CHANGE_ITEM_QUESTIONS_TITLE";
 
-export const ACTION_CHANGE_MULTIPLE_CHOICE_QUESTIONS_TITLE = (
-  parentId,
-  id,
-  text
-) => ({
-  type: ChangeMultipleChoiceQuestionsTitle,
+export const ACTION_CHANGE_ITEM_QUESTIONS_TITLE = (parentId, id, text) => ({
+  type: ChangeItemQuestionsTitle,
   parentId,
   id,
   text,
 });
 
-// 객관식 질문 삭제
-export const DeleteMultipleChoiceQuestions = "DELETE_MULTIPLE_CHOICE_QUESTIONS";
+// 아이템 질문(체크박스,객관식,드롭다운) 삭제
+export const DeleteItemQuestions = "DELETE_ITEM_QUESTIONS";
 
-export const ACTION_DELETE_MULTIPLE_CHOICE_QUESTIONS = (parentId, id) => ({
-  type: DeleteMultipleChoiceQuestions,
+export const ACTION_DELETE_ITEM_QUESTIONS = (parentId, id) => ({
+  type: DeleteItemQuestions,
   parentId,
   id,
 });
