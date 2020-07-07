@@ -9,7 +9,7 @@ import {
   Checkbox,
   Typography,
 } from "@material-ui/core";
-import { DragIndicator, Image, Cancel, Compare } from "@material-ui/icons";
+import { DragIndicator, Image, Cancel } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 
 import { itemType as CompareItemType } from "../../../word";
@@ -160,6 +160,7 @@ DragQuestion.propTypes = {
   parentId: PropType.number.isRequired,
   type: PropType.string.isRequired,
   itemType: PropType.string.isRequired,
+  index: PropType.number.isRequired,
 };
 
 // Question
@@ -216,4 +217,5 @@ Question.propTypes = {
   drag: PropType.func.isRequired,
   drop: PropType.func.isRequired,
   itemType: PropType.string.isRequired,
+  index: PropType.number.isRequired,
 };

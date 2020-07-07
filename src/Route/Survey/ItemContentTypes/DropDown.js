@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
 import { styled, Typography, TextField } from "@material-ui/core";
 import PropType from "prop-types";
+import { useDispatch } from "react-redux";
 
 import { itemType } from "../../../word";
 import ItemDragBox from "./ItemDragBox";
 import dataType from "../Item/ItemDragType";
-import { useDispatch } from "react-redux";
 import { ACTION_ADD_ITEM_QUESTIONS } from "../../../actions";
 
 const Container = styled("div")({

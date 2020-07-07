@@ -24,17 +24,27 @@ let QuestionId = 1;
 const InitalState = [
   {
     id: 1,
-    itemType: types.ShortAnswer,
+    itemType: types.StraightStep,
     title: "",
     description: "",
     focus: true,
     isEtc: false, // 기타 옵션 있는지 없는지
+    step: {
+      startValue: 0,
+      startLabel: "",
+      finishValue: 5,
+      finishLabel: "",
+    },
     questions: [
       {
         id: 1,
         title: "",
       },
     ],
+    grid: {
+      row: [],
+      column: [],
+    },
   },
 ];
 
@@ -46,12 +56,22 @@ function getEmptySurvey(id) {
     description: "",
     focus: true,
     isEtc: false, // 기타 옵션 있는지 없는지
+    step: {
+      startValue: 0,
+      startLabel: "",
+      finishValue: 5,
+      finishLabel: "",
+    },
     questions: [
       {
         id: 1,
         title: "",
       },
     ],
+    grid: {
+      row: [],
+      column: [],
+    },
   };
 }
 function getEmptyQuestion(id) {

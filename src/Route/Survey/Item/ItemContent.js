@@ -7,14 +7,15 @@ import Long from "../ItemContentTypes/Long";
 import MultipleChoiceQuestions from "../ItemContentTypes/MultipleChoiceQuestions";
 import CheckBox from "../ItemContentTypes/CheckBox";
 import DropDown from "../ItemContentTypes/DropDown";
+import StraightStep from "../ItemContentTypes/StraightStep";
 import { itemType as types } from "../../../word";
+import StraihtStep from "../ItemContentTypes/StraightStep";
 
 const Container = styled("div")({
   width: "100%",
 });
 
 const ItemTypeIsA = () => "단답형";
-const ItemTypeIsE = () => "드롭다운";
 const ItemTypeIsF = () => "파일업로드";
 const ItemTypeIsG = () => "직선단계";
 const ItemTypeIsH = () => "객관식그리드";
@@ -40,7 +41,7 @@ const ItemTypes = ({ itemType, id, questions, isEtc }) => {
     case types.FileUpload:
       return <ItemTypeIsF />;
     case types.StraightStep:
-      return <ItemTypeIsG />;
+      return <StraihtStep />;
     case types.MultipleChoiceGrid:
       return <ItemTypeIsH />;
     case types.CheckBoxGrid:
