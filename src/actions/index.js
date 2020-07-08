@@ -168,3 +168,21 @@ export const ACTION_REMOVE_ITEM_QUESTION_ETC = (parentId) => ({
   type: RemoveItemQuestionEtc,
   parentId,
 });
+
+/* 직선단계 단계 설정 */
+export const ChangeItemStep = "CHANGE_ITEM_STEP";
+export const ACTION_CHANGE_ITEM_STEP = (id, position, value) => ({
+  type: ChangeItemStep,
+  id,
+  position,
+  value,
+});
+
+/* 직선단계 라벨 설정 */
+export const ChangeItemStepLabel = "CHANGE_ITEM_STEP_LABEL";
+export const ACTION_CHANGE_ITEM_STEP_LABEL = (id, position, text) => ({
+  type: ChangeItemStepLabel,
+  id,
+  position,
+  text,
+});

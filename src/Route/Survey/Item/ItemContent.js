@@ -7,9 +7,8 @@ import Long from "../ItemContentTypes/Long";
 import MultipleChoiceQuestions from "../ItemContentTypes/MultipleChoiceQuestions";
 import CheckBox from "../ItemContentTypes/CheckBox";
 import DropDown from "../ItemContentTypes/DropDown";
-import StraightStep from "../ItemContentTypes/StraightStep";
-import { itemType as types } from "../../../word";
 import StraihtStep from "../ItemContentTypes/StraightStep";
+import { itemType as types } from "../../../word";
 
 const Container = styled("div")({
   width: "100%",
@@ -17,14 +16,13 @@ const Container = styled("div")({
 
 const ItemTypeIsA = () => "단답형";
 const ItemTypeIsF = () => "파일업로드";
-const ItemTypeIsG = () => "직선단계";
 const ItemTypeIsH = () => "객관식그리드";
 const ItemTypeIsI = () => "체크박스그리드";
 const ItemTypeIsJ = () => "날짜";
 const ItemTypeIsK = () => "시간";
 
 // eslint-disable-next-line react/prop-types
-const ItemTypes = ({ itemType, id, questions, isEtc }) => {
+const ItemTypes = ({ itemType, id, questions, isEtc, step }) => {
   switch (itemType) {
     case types.ShortAnswer:
       return <ShortAnswer />;
@@ -41,7 +39,7 @@ const ItemTypes = ({ itemType, id, questions, isEtc }) => {
     case types.FileUpload:
       return <ItemTypeIsF />;
     case types.StraightStep:
-      return <StraihtStep />;
+      return <StraihtStep id={id} step={step} />;
     case types.MultipleChoiceGrid:
       return <ItemTypeIsH />;
     case types.CheckBoxGrid:
@@ -55,13 +53,14 @@ const ItemTypes = ({ itemType, id, questions, isEtc }) => {
   }
 };
 
-const ItemContent = ({ itemType, questions, id, isEtc }) => (
+const ItemContent = ({ itemType, questions, id, isEtc, step }) => (
   <Container>
     <ItemTypes
       itemType={itemType}
       questions={questions}
       id={id}
       isEtc={isEtc}
+      step={step}
     />
   </Container>
 );
@@ -72,6 +71,7 @@ ItemContent.propTypes = {
   questions: PropType.array.isRequired,
   id: PropType.number.isRequired,
   isEtc: PropType.bool.isRequired,
+  step: PropType.shape({}).isRequired,
 };
 
 export default ItemContent;

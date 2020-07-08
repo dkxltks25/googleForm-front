@@ -72,6 +72,7 @@ const Item = ({ item, findItem }) => {
           id={item.id}
           itemType={item.itemType}
           questions={item.questions}
+          step={item.step}
           isEtc={item.isEtc}
         />
         {item.focus && <ItemActionArea />}
@@ -87,6 +88,7 @@ Item.propTypes = {
     title: PropType.string.isRequired,
     itemType: PropType.string.isRequired,
     questions: PropType.array.isRequired,
+    step: PropType.shape({}).isRequired,
     isEtc: PropType.bool.isRequired,
   }).isRequired,
   findItem: PropType.func.isRequired,

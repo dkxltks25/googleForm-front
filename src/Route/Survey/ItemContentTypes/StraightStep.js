@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 import {
   styled,
   Select,
@@ -6,6 +6,13 @@ import {
   Typography,
   TextField,
 } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import PropType from "prop-types";
+
+import {
+  ACTION_CHANGE_ITEM_STEP,
+  ACTION_CHANGE_ITEM_STEP_LABEL,
+} from "../../../actions";
 
 const Container = styled("div")({
   paddingTop: 24,
@@ -26,27 +33,46 @@ const SelectStepArea = styled("div")({
 const InputLabelArea = styled("div")({});
 
 const InputLine = styled("div")({
-     display: "flex", 
-     paddingBottom: 10 
-    });
+  display: "flex",
+  paddingBottom: 10,
+});
 const DisplayNumber = styled(Typography)({
   paddingTop: 4,
   paddingRight: 10,
+  minWidth: 20,
 });
 const InputNumber = styled(TextField)({});
 
-const StraihtStep = (props) => {
-  const [first, setFirst] = useState(0);
-  const [last, setLast] = useState(5);
+const START = "start";
+const FINISH = "finish";
+
+const StraihtStep = ({
+  id,
+  step: { startValue, finishValue, startLabel, finishLabel },
+}) => {
+  const dispatch = useDispatch();
+
+  const ChangeFirstRange = useCallback((e) => {
+    dispatch(ACTION_CHANGE_ITEM_STEP(id, START, e.target.value));
+  });
+  const ChangeFinishRange = useCallback((e) => {
+    dispatch(ACTION_CHANGE_ITEM_STEP(id, FINISH, e.target.value));
+  });
+  const ChangeFirstLabel = useCallback((e) => {
+    dispatch(ACTION_CHANGE_ITEM_STEP_LABEL(id, START, e.currentTarget.value));
+  });
+  const ChangeFinishLabel = useCallback((e) => {
+    dispatch(ACTION_CHANGE_ITEM_STEP_LABEL(id, FINISH, e.currentTarget.value));
+  });
   return (
     <Container>
       <SelectStepArea>
-        <NumberRange value={first} onChange={(e) => setFirst(e.target.value)}>
+        <NumberRange value={startValue} onChange={ChangeFirstRange}>
           <MenuItem value={0}>0</MenuItem>
           <MenuItem value={1}>1</MenuItem>
         </NumberRange>
         <Typography>~</Typography>
-        <NumberRange value={last} onChange={(e) => setLast(e.target.value)}>
+        <NumberRange value={finishValue} onChange={ChangeFinishRange}>
           <MenuItem value={2}>2</MenuItem>
           <MenuItem value={3}>3</MenuItem>
           <MenuItem value={4}>4</MenuItem>
@@ -60,16 +86,26 @@ const StraihtStep = (props) => {
       </SelectStepArea>
       <InputLabelArea>
         <InputLine>
-          <DisplayNumber>{first}</DisplayNumber>
-          <InputNumber />
+          <DisplayNumber>{startValue}</DisplayNumber>
+          <InputNumber value={startLabel} onChange={ChangeFirstLabel} />
         </InputLine>
         <InputLine>
-          <DisplayNumber>{last}</DisplayNumber>
-          <InputNumber />
+          <DisplayNumber>{finishValue}</DisplayNumber>
+          <InputNumber value={finishLabel} onChange={ChangeFinishLabel} />
         </InputLine>
       </InputLabelArea>
     </Container>
   );
+};
+
+StraihtStep.propTypes = {
+  id: PropType.number.isRequired,
+  step: PropType.shape({
+    startValue: PropType.number.isRequired,
+    startLabel: PropType.string.isRequired,
+    finishValue: PropType.number.isRequired,
+    finishLabel: PropType.string.isRequired,
+  }).isRequired,
 };
 
 export default StraihtStep;

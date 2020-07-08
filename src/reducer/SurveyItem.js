@@ -16,6 +16,8 @@ import {
   MoveItemQuestion,
   AddItemQuestionEtc,
   RemoveItemQuestionEtc,
+  ChangeItemStep,
+  ChangeItemStepLabel,
 } from "../actions";
 
 let ItemId = 1;
@@ -228,7 +230,6 @@ function moveItemQuestion(state, parentId, id, targetIndex) {
 }
 
 // 기타 질문 추가
-
 function addItemQuestionEtc(state, parentId) {
   return state.map((item) =>
     item.id === parentId ? { ...item, isEtc: true } : item
@@ -239,6 +240,37 @@ function addItemQuestionEtc(state, parentId) {
 function removeItemQuestionEtc(state, parentId) {
   return state.map((item) =>
     item.id === parentId ? { ...item, isEtc: false } : item
+  );
+}
+
+// 직선단계 범위 번경
+function changeItemStep(state, id, position, value) {
+  const key = position === "start" ? "startValue" : "finishValue";
+  return state.map((item) =>
+    item.id === id
+      ? {
+          ...item,
+          step: {
+            ...item.step,
+            [key]: value,
+          },
+        }
+      : item
+  );
+}
+// 직선단계 라벨 변경
+function changeItemStepLabel(state, id, position, text) {
+  const key = position === "start" ? "startLabel" : "finishLabel";
+  return state.map((item) =>
+    item.id === id
+      ? {
+          ...item,
+          step: {
+            ...item.step,
+            [key]: text,
+          },
+        }
+      : item
   );
 }
 
@@ -280,6 +312,15 @@ const SurveyItemReducer = (state = InitalState, action) => {
       return addItemQuestionEtc(state, action.parentId);
     case RemoveItemQuestionEtc:
       return removeItemQuestionEtc(state, action.parentId);
+    case ChangeItemStep:
+      return changeItemStep(state, action.id, action.position, action.value);
+    case ChangeItemStepLabel:
+      return changeItemStepLabel(
+        state,
+        action.id,
+        action.position,
+        action.text
+      );
     default:
       return state;
   }
