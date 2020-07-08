@@ -186,3 +186,37 @@ export const ACTION_CHANGE_ITEM_STEP_LABEL = (id, position, text) => ({
   position,
   text,
 });
+
+/* 그리드 열 추가 */
+export const AddItemGrid = "ADD_ITEM_GRID";
+export const ACTION_ADD_ITEM_GRID = (id, target) => ({
+  type: AddItemGrid,
+  id,
+  target,
+});
+/* 그리드 열 삭제 */
+export const DeleteItemGrid = "DELETE_ITEM_GRID";
+export const ACTION_DELETE_ITEM_GRID = (parentId, id, target) => ({
+  type: DeleteItemGrid,
+  parentId,
+  id,
+  target,
+});
+/* 그리드 텍스트 변경 */
+export const ChangeItemGrid = "CHANGE_ITEM_GRID";
+export const ACTION_CHANGE_ITEM_GRID = (parentId, id, text, target) => ({
+  type: ChangeItemGrid,
+  parentId,
+  id,
+  text,
+  target,
+});
+/* 그리드 아이템간의 이동 */
+export const MoveItemGrid = "MOVE_ITEM_GRID";
+export const ACTION_MOVE_ITEM_GRID = (parentId, id, targetIndex, target) => ({
+  type: MoveItemGrid,
+  parentId,
+  id,
+  targetIndex,
+  target,
+});

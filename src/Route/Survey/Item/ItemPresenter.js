@@ -74,6 +74,7 @@ const Item = ({ item, findItem }) => {
           questions={item.questions}
           step={item.step}
           isEtc={item.isEtc}
+          grid={item.grid}
         />
         {item.focus && <ItemActionArea />}
       </SurveyCard>
@@ -90,6 +91,7 @@ Item.propTypes = {
     questions: PropType.array.isRequired,
     step: PropType.shape({}).isRequired,
     isEtc: PropType.bool.isRequired,
+    grid: PropType.shape({}).isRequired
   }).isRequired,
   findItem: PropType.func.isRequired,
 };

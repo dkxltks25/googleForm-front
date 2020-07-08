@@ -9,7 +9,7 @@ import {
   Checkbox,
   Typography,
 } from "@material-ui/core";
-import { DragIndicator, Image, Cancel } from "@material-ui/icons";
+import { DragIndicator, Image, Close } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 
 import { itemType as CompareItemType } from "../../../word";
@@ -60,7 +60,13 @@ const QuestionCancel = styled(IconButton)({});
 const DropContainer = styled("div")({});
 const DragContainer = styled("div")({});
 
-const ItemDragBox = ({ questions, type, parentId, itemType }) => {
+const ItemDragBox = ({
+  questions,
+  type,
+  parentId,
+  itemType,
+  isGrid = false,
+}) => {
   const findQuestion = (id) => {
     const item = questions.filter((i) => i.id === id)[0];
     return {
@@ -80,6 +86,7 @@ const ItemDragBox = ({ questions, type, parentId, itemType }) => {
           type={type}
           itemType={itemType}
           index={index}
+          isGrid={isGrid}
         />
       ))}
     </DropContainer>
@@ -94,6 +101,7 @@ ItemDragBox.propTypes = {
   ).isRequired,
   parentId: PropType.number.isRequired,
   itemType: PropType.string.isRequired,
+  isGrid: PropType.bool.isRequired,
 };
 
 export default ItemDragBox;
@@ -105,6 +113,7 @@ const DragQuestion = ({
   type,
   itemType,
   index,
+  isGrid,
 }) => {
   const dispatch = useDispatch();
   const originalIndex = findQuestion(question.id);
@@ -146,6 +155,7 @@ const DragQuestion = ({
         title={question.title}
         itemType={itemType}
         index={index}
+        isGrid={isGrid}
       />
     </DragContainer>
   );
@@ -161,10 +171,20 @@ DragQuestion.propTypes = {
   type: PropType.string.isRequired,
   itemType: PropType.string.isRequired,
   index: PropType.number.isRequired,
+  isGrid: PropType.bool.isRequired,
 };
 
 // Question
-const Question = ({ parentId, id, title, drag, drop, itemType, index }) => {
+const Question = ({
+  parentId,
+  id,
+  title,
+  drag,
+  drop,
+  itemType,
+  index,
+  isGrid,
+}) => {
   const dispatch = useDispatch();
   const ChangeQuestionTitle = useCallback(
     (e) =>
@@ -200,11 +220,13 @@ const Question = ({ parentId, id, title, drag, drop, itemType, index }) => {
           value={title}
           onChange={ChangeQuestionTitle}
         />
-        <QuestionImage>
-          <Image />
-        </QuestionImage>
+        {!isGrid && (
+          <QuestionImage>
+            <Image />
+          </QuestionImage>
+        )}
         <QuestionCancel onClick={DeleteQuestion}>
-          <Cancel />
+          <Close />
         </QuestionCancel>
       </QuestiionWrap>
     </QuestionLine>
@@ -218,4 +240,5 @@ Question.propTypes = {
   drop: PropType.func.isRequired,
   itemType: PropType.string.isRequired,
   index: PropType.number.isRequired,
+  isGrid: PropType.bool.isRequired,
 };

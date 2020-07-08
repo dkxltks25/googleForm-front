@@ -18,15 +18,20 @@ import {
   RemoveItemQuestionEtc,
   ChangeItemStep,
   ChangeItemStepLabel,
+  AddItemGrid,
+  DeleteItemGrid,
+  ChangeItemGrid,
+  MoveItemGrid,
 } from "../actions";
 
 let ItemId = 1;
 let QuestionId = 1;
-
+let rowId = 1;
+let columnId = 1;
 const InitalState = [
   {
     id: 1,
-    itemType: types.StraightStep,
+    itemType: types.MultipleChoiceGrid,
     title: "",
     description: "",
     focus: true,
@@ -274,6 +279,21 @@ function changeItemStepLabel(state, id, position, text) {
   );
 }
 
+// 그리드 열 추가
+function addItemGrid(state, id, target) {
+  if (target === "row") rowId += 1;
+  else if (target === "column") columnId += 1;
+  else return state;
+
+  return state.map((item) => (item.id === id ? {
+    ...item,
+    grid:[
+      ...item.grid,
+      [target]: [1]
+    ]
+  } : item));
+}
+
 const SurveyItemReducer = (state = InitalState, action) => {
   switch (action.type) {
     case AddItem: // 항목추가
@@ -321,6 +341,14 @@ const SurveyItemReducer = (state = InitalState, action) => {
         action.position,
         action.text
       );
+    case AddItemGrid:
+      return state;
+    case DeleteItemGrid:
+      return state;
+    case ChangeItemGrid:
+      return state;
+    case MoveItemGrid:
+      return state;
     default:
       return state;
   }
